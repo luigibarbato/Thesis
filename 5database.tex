@@ -1,0 +1,482 @@
+La maggior parte delle applicazioni ha necessità di utilizzare dati provenienti da diverse sorgenti dati come possono essere database o file generici, ancor di più nell'ambito del Calcolo Scientifico occorre poter gestire grandi moli di dati in modo rapido ed efficiente. In questo senso il Cloud è un ottimo alleato grazie alla sua scalabilità, caratteristica che Fly si pone l'obiettivo di sfruttare al meglio. Risulta quindi chiaro quanto sia importante che il linguaggio metta a disposizione degli utenti delle funzionalità che permettano di accedere e utilizzare dati provenienti da sorgenti esterne.\\
+Il metodo più semplice di memorizzazione dei dati è sicuramente attraverso dei file, in particolare è comune l'utilizzo di file strutturati come CSV e fogli Excel che consentono di gestire anche grandi quantità di informazioni. La prima necessità è quindi di integrare all'interno della sintassi di Fly dei metodi e delle entità che consentano di interagire con diversi tipi di file strutturati in modo agevole. Oltre a questi, lo strumento più diffuso per la gestione dei dati sono i database che permettono di utilizzare strutture più complesse e maggiori funzionalità per la gestione delle informazioni memorizzate. Al fine di rendere possibile l'inserimento, l'aggiornamento, la cancellazione o soltanto la ricerca di dati in un database, le informazioni al suo interno vengono strutturate e collegate tra loro secondo un particolare modello logico, tra cui il più utilizzato è sicuramente il modello relazione che rappresenta i dati all'interno di tabelle. Appositi linguaggi di interrogazione sono invece utilizzati per creare, manipolare e consultare i database mediante dei sistemi software chiamati DBMS, \textit{DataBase Management System}, che consentono di creare delle query, ovvero delle interrogazioni, per l'interazione con il database. Tra questi troviamo gli RDBMS, \textit{Relational DataBase Management System}, ovvero DBMS per database relazionali, di cui quello più diffuso è MySQL \cite{mysql}.\\
+In questo capitolo verrà descritta l'implementazione all'interno di Fly del supporto alle sorgenti dati esterne, in particolare l'integrazione della possibilità di leggere e scrivere file dati strutturati e di accedere ed interagire con database MySQL, siano essi locali o su Cloud.
+
+\section{Obiettivi}
+Lo sviluppo delle funzionalità che consentono di interagire con sorgenti dati esterne all'interno di Fly ha seguito una serie di obiettivi implementativi ritenuti fondamentali per qualsiasi applicazione.\\
+Trattando di \textbf{database MySQL} si richiede la possibilità di:
+
+\begin{itemize}
+    \item connettersi e accedere a database sia locali che su Cloud;
+    \item creare ed eseguire query per la manipolazione dei dati;
+    \item fornire metodi ed entità per la gestione del risultato, rappresentato da tabelle.
+\end{itemize}
+
+Mentre per quanto concerne i \textbf{file dati strutturati}:
+
+\begin{itemize}
+    \item creazione di un nuovo file;
+    \item lettura;
+    \item scrittura;
+    \item modifica;
+\end{itemize}
+
+\section{File dati e gestione delle tabelle}
+L'interazione con file dati e la gestione delle tabelle è stata resa possibile all'interno di Fly mediante l'introduzione dell'entità \verb|dataframe|. Essa consente di modellare una tabella contenente dati provenienti da database relazionali, Listato~\ref{lst:dataframeDB}, o da file strutturati, Listato~\ref{lst:dataframeFile} specificando la sorgente mediante il campo \verb|source|. Nel primo caso i dati provengono da un database, di conseguenza viene il parametro fa riferimento ad un'entità che rappresenta la connessione ad un database che verrà descritta in seguito e comprende un parametro opzionale che consente di usare una query specifica per ottenere solo una parte dei dati della tabella. Nel caso invece di un file dati strutturato, che può essere CSV, fogli Excel o semplici txt, è necessario inserire il suo percorso all'interno del file system, potendo specificare anche il separatore utilizzato, ovvero il simbolo che suddivide le singole informazioni, e la presenza o meno di un header, l'intestazione della tabella che contiene il nome dei campi.\\
+La dichiarazione di una variabile di \verb|type| \verb|=| \verb|"dataframe"| necessita quindi dei seguenti parametri:
+
+\begin{itemize}
+    \item \verb|name|: stringa rappresentante il nome della tabella;
+    \item \verb|source|: sorgente da cui ottenere i dati da inserire nella tabella, in base al tipo deve deve contenere:
+    \begin{itemize}
+        \item \textbf{file}: stringa rappresentante percorso del file, ovvero la posizione specifica all'interno del file system;
+        \item \textbf{database}: nome della variabile rappresentante un database;
+    \end{itemize}
+    \item \verb|separator| (solo in caso la sorgente sia un file): simbolo utilizzato come separatore all'interno del file, è un parametro opzionale di default utilizza la virgola ",";
+    \item \verb|header| (solo in caso la sorgente sia un file): valore booleano che indica la presenza o meno di un header all'interno del file, \verb|true| se è presente, \verb|false| altrimenti, è un parametro opzionale di default impostato su \verb|true|;
+    \item \verb|query| (solo in caso la sorgente sia un database): stringa che rappresenta la query per specificare il sottoinsieme di dati da leggere, è un parametro opzionale che di default seleziona tutti i dati.
+\end{itemize}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità dataframe creata a partire da un file.}, label={lst:dataframeFile}]
+var table = [type="dataframe", name="nomeTabella", source="/home/path/file.csv", separator=",", header="false"]
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità dataframe creata a partire da una tabella MySQL con e senza l'utilizzo del parametro query.}, label={lst:dataframeDB}]
+var tableOne = [type="dataframe", name="nomeTabella", source=dbConn]
+
+var tableTwo = [type="dataframe", name="nomeTabella", source=dbConn, query="SELECT prova WHERE prova=10"]
+\end{lstlisting}
+
+L'entità dataframe dispone inoltre di una funzione per l'esportazione dei dati, potendo trasferire i dati in essa contenuti all'interno di un file CSV mediante i metodi \verb|export()|, che ignora l'intestazione, e \verb|exportHeader()|, che invece la comprende. Il parametro da passare all'interno delle parentesi è il file di destinazione da scrivere, per cui Fly mette a disposizione l'entità di \verb|type| \verb|=| \verb|"file"| visibile Listato~\ref{lst:file} e la cui sintassi è descritta di seguito:
+
+\begin{itemize}
+    \item \verb|name|: stringa rappresentante il nome del file;
+    \item \verb|path|: stringa rappresentante percorso del file, ovvero la posizione specifica all'interno del file system; 
+    \item \verb|ext|: stringa rappresentante l'estensione del file.
+\end{itemize}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità file.}, label={lst:file}]
+var fileCSV = [type="file", name="nomeFile", path="/home/path/file.csv", ext="csv"]
+\end{lstlisting}
+
+\subsection{Implementazione}
+
+\subsubsection{Java}
+L'implementazione all'interno di Java dell'entità \verb|dataframe| e dei suoi metodi è stata effettuata mediante l'utilizzo della libreria \textit{Tablesaw} \cite{tablesaw}, un potente strumento per la manipolazione di dati che include metodi per la gestione e la visualizzazione delle tabelle, così come strumenti per il caricamento, la trasformazione, il filtro e l'elaborazione delle informazioni. Tablesaw permette di importare ed esportare dati provenienti da RDBMS, come nel caso di MySQL, oltre a file Excel, CSV, JSON, HTML o semplici txt. \\
+L'utilizzo di Maven come gestore di progetto permette di inglobare la libreria semplicemente inserendola come dipendenza all'interno del file POM, così come avviene per tutte le altre dipendenze di un programma Fly. \\
+Il codice Java generato dal compilatore Fly alla dichiarazione di una variabile dataframe utilizza l'oggetto \verb|Table| di Tablesaw per effettuare tutte le operazioni necessarie.
+
+\subsubsection{JavaScript}
+La gestione dell'entità \verb|dataframe| e dei suoi metodi all'interno di JavaScript è integrata grazie alla libreria \textit{dataframe-js} \cite{dataframejs} che fornisce la possibilità di creare una struttura dati contenente righe e colonne che può essere gestita in modo simile a come si farebbe con un database MySQL. L'installazione in questo caso avviene tramite il gestore di pacchetti npm nelle modalità descritte nei paragrafi precedenti.
+
+\subsubsection{Python}
+Python, essendo un linguaggio largamente utilizzato all'interno della data science, fornisce un supporto nativo alla gestione delle tabelle e delle sorgenti di dati di vario tipo, di conseguenza non è stato necessario includere alcun tipo di libreria ausiliaria per la gestione dell'entità \verb|dataframe| e dei suoi metodi.
+
+\section{Database as a Service}
+Il principale obiettivo di Fly è quello di essere un linguaggio per lo sviluppo di applicazioni su Cloud che risulti semplice da utilizzare ma allo stesso tempo efficiente nel funzionamento, di conseguenza qualsiasi nuova implementazione deve comprendere l'integrazione con l'ambiente Cloud. I servizi per la gestione di database offerti dai vari provider sono racchiusi nel modello Database as a Service (DBaaS), il quale comprende tutti gli strumenti utili agli utenti al fine di creare, configurare e gestire database mediante delle interfacce ad alto livello che astraggono l'utente rispetto all'infrastruttura necessaria all'implementazione e al funzionamento del database. Difatti è il Cloud provider che fornisce le strutture, l’hardware e il software necessari, evitando tutte le complicazioni e i costi che si avrebbero con un sistema locale. Installazione, manutenzione, aggiornamenti e tutti i conseguenti oneri di amministrazione sono completamente gestiti, in questo modo l'utente è in grado di utilizzare il database senza alcuna preoccupazione ulteriore.\\
+Secondo Forrester, una delle più autorevoli aziende di ricerca e consulenza IT del mondo,il 33\% delle organizzazioni nel mondo utilizza già sistemi di sviluppo che comprendono i servizi DBaaS e questa percentuale raddoppierà nei prossimi tre o quattro anni. In aggiunta a ciò il 61\% delle aziende mondiali prevede di aumentare di almeno il 5\% gli investimenti nei servizi DBaaS nei prossimi anni, il 22\% di esse addirittura del 10\% in più rispetto agli anni passati \cite{forrester}. Risulta palese come il paradigma DBaaS stia cambiando profondamente il modo in cui le aziende possono strutturare e costruire i propri sistemi e le applicazioni aziendali grazie a servizi che permettono di creare database relazionali e non in pochi minuti.\\
+I servizi DBaaS seguono la filosofia di fondo del Cloud Computing offrendo piattaforme flessibili e scalabili specializzate nel fornire un sistema di facile gestione, ad alte prestazioni e personalizzabile in base alle esigenze dell’utente. Essi consentono creare un database in pochi minuti senza avere necessariamente le relative competenze tecniche, evitando in questo modo il bisogno di impiegare personale tecnico specializzato e spostando tutte le risorse sullo sviluppo della propria applicazione. Un ulteriore vantaggio è dato dalla riduzione dei costi di investimento in quanto in quanto vengono totalmente eliminate le fasi di progettazione, installazione e manutenzione del sistema necessarie alla costruzione di un'infrastruttura per il funzionamento di un database. Ciò è vero soprattutto per le piccole e medie imprese che possono evitare del tutto le spese derivanti dall'acquisto di hardware e licenze software, ma anche quelle relative al personale tecnico necessario alla gestione e alla manutenzione. 
+I Cloud provider infatti per mantenere una buona posizione sul mercato, si preoccupano di migliorare continuamente i propri servizi che permettono di automatizzare e semplificare numerose operazioni, andando ad aumentare enormemente l'efficienza del sistema e garantendo sempre prestazione elevate. Trattandosi di servizi in Cloud non può mancare la garanzia di poter far scalare il proprio sistema rapidamente ed in qualsiasi momento, potendo iniziare con una quantità limitata di risorse per poi aumentarle in base alle necessità. I servizi DBaaS forniscono, inoltre, alta sicurezza grazie alla gestione automatizzata, alla possibilità di avere una rete isolata e dedicata e ai sistemi di crittografia disponibili, insieme con un monitoraggio continuo delle operazioni effettuate che consente di tracciare in modo preciso ogni azione. La caratteristica dei Cloud provider di avere server sparsi in varie locazioni del globo garantisce alta ridondanza e robustezza in modo da ottenere una maggiore protezione dai guasti oltre che una latenza minima potendo collegarsi al server più vicino geograficamente. Infine, riguardo ai costi, anche in questo caso si utilizza il sistema pay-as-you-go che calcola i prezzi solo in base all'uso effettivo. Non mancano comunque alcune problematiche relative all'utilizzo di questi servizi, in particolare il mancato controllo diretto dei server sui quali è in esecuzione il proprio database, caratteristica intrinseca di tutti i servizi di Cloud Computing. Inoltre, dovendo affidare il proprio sistema ad un provider esterno è necessaria una certa fiducia nei suoi confronti, sia per quanto concerne la protezione dei dati, quindi privacy e trattamento di dati sensibili, sia per le prestazioni fornite rispetto a quelle dichiarate nel documento di Service Level Agreement (SLA). Una differenza che spesso risulta tanto piccola da non essere sufficiente a muovere azioni legali o contenziosi ma che su lavorando con numeri molto grandi può diventare significativa.\\
+I numerosi vantaggi di questo modello hanno portato ad una crescita esponenziale dei servizi DBaaS al punto che attualmente essi rendono possibile la creazione di diverse tipologie di database riuscendo a supportare una grande varietà di casi d’uso che vanno dai più semplici come il testing o la costruzione di sistemi di backup, fino ai più sofisticati e complessi che supportano l’IoT, il mondo mobile o i Big Data. \\
+
+\subsection{Implementazione}
+\subsubsection{Connessione al database}
+L'introduzione all'interno di Fly della possibilità di interagire con i database MySQL è stata resa possibile mediante l'implementazione dell'entità \verb|sql| che consente di modellare la connessione ad un database, sia esso locale, Listato~\ref{lst:dbLocal}, o su Cloud, supportando sia l'ambiente AWS, Listato~\ref{lst:dbAWS}, che Azure, Listato~\ref{lst:dbAzure}. La sintassi è stata progettata in modo da rispettare l'approccio già usato in Fly per l'esecuzione delle funzioni, in particolare, dopo la dichiarazione della variabile, si utilizza la parola chiave \verb|on| per specificare l'ambiente di esecuzione sul quale è presente il database. Questo aspetto risulta importante in quanto l'ambiente va a definire quali sono i parametri necessari da inserire, tra essi gli unici sempre richiesti sono il nome del database e le credenziali di accesso. Andando più nel dettaglio un database locale non avrà bisogno dei riferimenti per connettersi al servizio DBaaS su Cloud che, al contrario, richiede anche il nome dell'istanza e, nel caso di Azure, anche il gruppo di risorse di appartenenza. \\
+La dichiarazione di una variabile di \verb|type| \verb|=| \verb|"sql"| necessita dei seguenti parametri:
+
+\begin{itemize}
+    \item \verb|dbName|: stringa rappresentante il nome del database;
+    \item \verb|resourceGroup| (solo in caso il database sia su Azure): stringa rappresentante il nome del ResourceGroup in cui è contenuta l'istanza del servizio DBaaS;
+    \item \verb|instance| (solo in caso il database sia su Cloud): stringa rappresentante il nome dell'istanza del servizio DBaaS su cui è in esecuzione il database;
+    \item \verb|user|: stringa rappresentante il nome utente per l'accesso al database;
+    \item \verb|password|: stringa rappresentante la password di accesso al database.
+\end{itemize}
+
+Dopo la dichiarazione della variabile occorre specificare la variabile di ambiente su cui è in esecuzione il database utilizzando la parola chiave \verb|on| che può essere di \verb|type| \verb|=| \verb|smp/aws/azure|.\\
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità sql per la connessione ad un database locale.}, label={lst:dbLocal}]
+var dbConnLocal = [type="sql", dbName="nomeDatabase", user="user", password="password"] on local
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità sql per la connessione ad un database su AWS.}, label={lst:dbAWS}]
+var dbConnAws = [type="sql", instance="nomeIstanza", dbName="nomeDatabase", user="user", password="password"] on cloudAws
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità sql per la connessione ad un database locale.}, label={lst:dbAzure}]
+var dbConnAz = [type="sql", resourceGroup='nomeResourceGroup', instance='nomeIstanza', dbName="nomeDatabase", user="user@nomeIstanza", password="password"] on cloudAz
+\end{lstlisting}
+
+\subsubsection{Creazione ed esecuzione di query}
+La possibilità di poter creare ed eseguire query è fondamentale in quanto esse consentono di interagire con il database mediante delle interrogazioni che permettono operazioni come l'inserimento, la cancellazione e la modifica dei dati. La diversità intrinseca che esiste nelle varie tipologie di query porta alla necessità di avere un'entità dedicata all'interno di Fly che si realizza nel \verb|type| \verb|=| \verb|query| la quale consente di modellare un'interrogazione specificando il database su cui eseguirla e la tipologia di query, diversa in base al risultato atteso. Una query di selezione, Listato~\ref{lst:querySelect}, darà come risposta una tabella contenente i dati richiesti, al contrario di query di inserimento, modifica o cancellazione, Listato~\ref{lst:queryUpdate}, che invece restituiscono solamente il numero delle righe coinvolte nell'operazione. Caso particolare riguarda le query di aggregazione, Listato~\ref{lst:queryValue}, ovvero interrogazioni che utilizzano funzioni come media, conteggio, somme, minimo, massimo e così via. Queste restituiscono il valore richiesto sotto forma di una stringa contenente altre informazioni oltre al solo numero, rendendone difficoltoso l'utilizzo in un programma Fly. Per superare questa problematica vengono sfruttate delle funzioni RegEx, ovvero espressioni regolari che permettono di filtrare i caratteri contenuti in una stringa, nel caso specifico esse vengono utilizzate per ottenere solamente il valore numerico.\\
+Una variabile query viene quindi dichiarata utilizzando il \verb|type| \verb|=| \verb|"query"| e necessita dei seguenti parametri:
+
+\begin{itemize}
+    \item \verb|query_type|: stringa rappresentante il tipo della query da eseguire, i valori accettati sono:
+    \begin{itemize}
+        \item \verb|select|: query di selezione che restuisce come risultato una tabella;
+        \item \verb|value|: query di aggregazione che restituisce come risultato una stringa complessa che deve essere opportunamente filtrata;
+        \item \verb|update|: query di inserimento, modifica o cancellazione che restituisce come risultato il numero di righe coinvolte;
+    \end{itemize}
+    \item \verb|connection|: nome della variabile di tipo \verb|sql| rappresentante la connessione ad un database;
+    \item \verb|string|: interrogazione in linguaggio SQL da eseguire, può essere specificata in due differenti formati:
+    \begin{itemize}
+        \item stringa di testo;
+        \item nome di una variabile di tipo stringa.
+    \end{itemize}
+\end{itemize}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità query per l'esecuzione di un'interrogazione di selezione che utilizza una stringa di testo.}, label={lst:querySelect}]
+var queryStatement = [type="query", query_type="select", connection=dbConn, string="SELECT * FROM table"]
+
+var risultato = queryStatement.execute()
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità query per l'esecuzione di un'interrogazione di inserimento che utilizza una variabile di tipo stringa.}, label={lst:queryUpdate}]
+var stringaInserimento = "INSERT INTO tableName VALUES (1)"
+
+var queryStatement = [type="query", query_type="update", connection=dbConn, string=stringaInserimento]
+
+queryStatement.execute()
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dichiarazione di entità query per l'esecuzione di un'interrogazione di aggregazione di media che utilizza una variabile di tipo stringa.}, label={lst:queryValue}]
+var stringaMedia = "SELECT AVG(campo) FROM nomeTabella"
+
+var queryStatement = [type="query", query_type="value", connection=dbConn, string=stringaMedia]
+
+var media = queryStatement.execute()
+\end{lstlisting}
+
+Il grande vantaggio fornito dai servizi DBaaS è dato dalla possibilità di poter accedere ai database su Cloud mediante gli stessi strumenti utilizzati per la connessione e la gestione di database locali. Questo ha permesso di implementare all'interno di Fly le funzionalità appena descritte utilizzando le librerie largamente utilizzate per interagire con i database MySQL. L'unico compito aggiuntivo di cui il compilatore Fly si fa carico è il collegamento all'istanza su Cloud in cui è in esecuzione il database per ottenere la stringa necessaria alla connessione, ovvero l'endpoint.
+
+\subsubsection{Java}
+Il programma Java generato dal compilatore Fly utilizza i driver standard \textit{JDBC} (Java DataBase Connectivity) \cite{jdbc}, un connettore che consente l'accesso e la gestione dei dati su database tramite il linguaggio di programmazione Java. Analogamente alle altre dipendenze, anche il connettore MySQL è stato inserito all'interno del file POM di Maven.\\
+Nel Listato~\ref{lst:sqlJava} è visibile il codice generato alla dichiarazione di una variabile di tipo \verb|sql|. Come specificato in precedenza esso è utilizzabile indipendentemente dall'ambiente di esecuzione del database in quanto è sufficiente conoscere l'endpoint per accedervi.\\
+
+\begin{lstlisting}[language=Java,caption={Codice Java generato per la variabile di tipo sql.}, label={lst:sqlJava}]
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+Connection dbConn = DriverManager.getConnection("jdbc:mysql://" + endpoint + "/nomeDatabase?user=user&password=password");
+\end{lstlisting}  
+
+La generazione del codice per un'entità di tipo \verb|query| varia solo in base al \verb|query_type|, in particolare nel caso di query \verb|select| viene utilizzato il metodo \verb|executeQuery()| il cui valore di ritorno è una tabella che viene inserita all'interno di una variabile di tipo \verb|Table| compresa nella libreria Tablesaw, Listato~\ref{lst:querySelectJava}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice Java generato per la variabile di tipo query per l'esecuzione di un'interrogazione di selezione che utilizza una stringa di testo.}, label={lst:querySelectJava}]
+PreparedStatement queryStatement = dbConn.prepareStatement(
+    "SELECT * FROM nomeTabella"
+);
+
+Table risultato = Table.read().db(queryStatement.executeQuery());
+\end{lstlisting}
+
+Le query di tipo \verb|update| vengono invece eseguite mediante il metodo \verb|executeUpdate()| il cui valore di ritorno è un intero, Listato~\ref{lst:queryUpdateJava}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice Java generato per la variabile di tipo query per l'esecuzione di un'interrogazione di inserimento che utilizza una variabile di tipo stringa.}, label={lst:queryUpdateJava}]
+String stringaInserimento = "INSERT INTO nomeTabella VALUES (1)";
+
+PreparedStatement queryStatement = dbConn.prepareStatement(
+    stringaInserimento
+);
+
+queryStatement.executeUpdate();
+\end{lstlisting}  
+
+Infine il caso particolare che concerne le query di aggregazione, indicate dal tipo \verb|value|, vengono trattate allo stesso modo delle query di selezione, quindi utilizzando il metodo \verb|executeQuery()| che restituisce una tabella che viene inserita all'interno di una variabile di tipo \verb|Table|. Tuttavia, al fine di rendere utilizzabile tale risultato, è necessario utilizzare un'espressione regolare in modo da ottenere il solo valore numerico, Listato~\ref{lst:queryValueJava}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice Java generato per la variabile di tipo query per l'esecuzione di un'interrogazione di aggregazione che utilizza una variabile di tipo stringa.}, label={lst:queryValueJava}]
+String stringaMedia = "SELECT AVG(campo) FROM nomeTabella";
+
+PreparedStatement queryStatement = dbConn.prepareStatement(
+    stringaMedia
+);
+
+String risultato = Table.read().db(
+	queryStatement.executeQuery()
+).printAll().replaceAll("[^\\d.]+|\\.(?!\\d)", "");
+\end{lstlisting}
+
+\subsubsection{JavaScript}
+L'implementazione dell'interazione con i database MySQL all'interno di JavaScript sfrutta la libreria \textit{mysql} \cite{mysqlnpm}. Anche in questo caso vale il concetto per cui database su Cloud possono essere utilizzati alla stessa maniera di come si farebbe in locale, il codice generato è visibile all'interno del Listato~\ref{lst:sqlJs}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice JavaScript generato per la variabile di tipo sql.}, label={lst:sqlJs}]
+var __mysql = require("mysql");
+
+[...]
+
+var dbConn = __mysql.createConnection({
+    host: endpoint,
+    user: "user",
+    password: "password",
+    database: "nomeDatabase"
+});
+\end{lstlisting}
+
+Il principale scopo di una query è quello di interagire con i dati all'interno di un database, tuttavia l'accesso ad esso risulta essere un'operazione asincrona per natura. Infatti quando viene lanciata un'interrogazione bisogna attenderne il risultato ma intanto il programma continuerà ad essere in esecuzione. Nei tradizionali linguaggi sincroni, come Java o Python, non è necessario gestire l'asincronia, al contrario in JavaScript ciò è richiesto. La necessità di utilizzare delle chiamate asincrone per eseguire le query ha richiesto l'introduzione della libreria \textit{util} \cite{util} che agevola la scrittura di codice di questo tipo.\\
+Grazie alla caratteristica di essere un linguaggio non tipizzato, ovvero le variabili non hanno un tipo ma lo assumono automaticamente in base al valore ad esse assegnato, la gestione dei vari \verb|query_type| risulta semplificata. Infatti è possibile utilizzare il metodo \verb|query()| sia per interrogazioni di inserimento che di modifica, Listato~\ref{lst:querySelectJs}. \\
+
+\begin{lstlisting}[language=Java,caption={Codice JavaScript generato per la variabile di tipo query per l'esecuzione di un'interrogazione di selezione che utilizza una stringa di testo.}, label={lst:querySelectJs}]
+var queryStatement = "SELECT * FROM nomeTabella";
+
+await (__util.promisify(dbConn.query).bind(dbConn))(
+    queryStatement
+);
+\end{lstlisting}
+
+Nel Listato~\ref{lst:queryValueJs} viene mostrato come, anche con i metodi della libreria mysql, è necessario ricorrere alle espressioni regolari quando si utilizzano query di aggregazione per ottenere come risultato solamente il valore numerico.\\
+
+\begin{lstlisting}[language=Java,caption={Codice JavaScript generato per la variabile di tipo query per l'esecuzione di un'interrogazione di aggregazione che utilizza una variabile di tipo stringa.}, label={lst:queryValueJs}]
+var stringaMedia = "SELECT AVG(campo) FROM nomeTabella";
+
+var queryStatement = stringaMedia;
+
+var risultato = JSON.stringify(
+	await (__util.promisify(dbConn.query).bind(dbConn))(
+        queryStatement
+	)
+).match(/[+-]?\d+(?:\.\d+)?/g);
+\end{lstlisting}
+
+\subsubsection{Python}
+Le funzioni Fly eseguite nel linguaggio Python utilizzano la libreria \textit{PyMySQL} \cite{pymysql} per accedere ed interagire con i database MySQL. Analogamente a Java e JavaScript l'interazione con database su Cloud funziona allo stesso modo rispetto a quella con database locali, Listato~\ref{lst:sqlPy}.\\
+
+\begin{lstlisting}[language=Python, caption={Codice Python generato per la variabile di tipo sql.}, label={lst:sqlPy}]
+import pymysql
+
+[...]
+
+dbConn = pymysql.connect(
+    host: endpoint,
+    user: 'user',
+    passwd: 'password',
+    db: 'nomeDatabase'
+)
+\end{lstlisting}
+
+Le funzionalità fornite dalla libreria PyMySQL \cite{pymysql} consentono di evitare il problema riscontrato con le query di aggregazione, permettendo di utilizzare lo stesso codice per interrogazioni di \verb|query_type| \verb|=| \verb|select| e \verb|value|, Listato~\ref{lst:querySelectPy}. In caso di sola lettura del database si utilizzato il metodo \verb|fetchone()| per ottenere il risultato. \\
+
+\begin{lstlisting}[language=Python, caption={Codice Python generato per la variabile di tipo query per l'esecuzione di un'interrogazione di aggregazione che utilizza una stringa di testo.}, label={lst:querySelectPy}]
+queryStatement = __cursordbConn.execute(
+    'SELECT AVG(campo) FROM nomeTabella'
+)
+
+var risultato = __cursordbConn.fetchone()[0]
+\end{lstlisting}
+
+Interrogazione che apportano modifiche al database, nella sintassi Fly specificate con \verb|query_type| \verb|=| \verb|update|, utilizzano invece il metodo \verb|commit()| per rendere effettivi i cambiamenti, com'è mostrato nel Listato~\ref{lst:queryUpdatePy}.\\
+
+\begin{lstlisting}[language=Python, caption={Codice Python generato per la variabile di tipo query per l'esecuzione di un'interrogazione di inserimento che utilizza una variabile di tipo stringa.}, label={lst:queryUpdatePy}]
+stringaInserimento =  'INSERT INTO nomeTabella VALUES (1)'
+
+queryStatement = __cursordbConn.execute(
+    stringaInserimento
+)
+
+__cursordbConn.commit()
+\end{lstlisting}
+
+\subsection{Amazon RDS}
+Amazon Web Services offre servizi per tutte le tipologie di database e per tutte le esigenze, in particolare \textbf{Amazon Relational Database Service} è un servizio che consente di creare, configurare ed utilizzare a proprio piacimento un database relazionale su Cloud potendo accedere alle funzionalità di un comune database senza dover modificare il codice, le applicazioni e gli strumenti utilizzati con i database locali. L'elemento alla base del servizio è l'istanza, ognuna delle quali può contenere uno o più database completamente configurabili in base alle proprie esigenze, sia in termini di potenza di calcolo che di memoria. Di queste ne vengono messe a disposizione diversi tipi di istanza per ogni tipo di esigenza ptendo scegliere tra gli engine più comuni come MySQL, MariaDB, Oracle, SQL Server o PostgreSQL \cite{RDS}. \\
+Così come gli altri servizi offerti da AWS, Amazon RDS può essere utilizzato attraverso la console, la Aws Command Line Interface, le chiamate API e le Amazon SDK, queste ultime in particolare, disponibili per tutti e tre i linguaggi utilizzati in Fly, Java, JavaScript e Python, hanno reso l'integrazione al suo interno particolarmente riuscita. Difatti, tramite le funzionalità fornite, si possono ottenere facilmente le informazioni necessarie alla connessione con il database in esecuzione su AWS. L'unica modifica necessaria per permettere l'accesso ad Amazon RDS è quella di aggiornare il documento di policy richiesto per ogni funzione Lambda, in particolare con l'inserimento della regola per consentire l'utilizzo del servizio.
+
+\subsubsection{Java}
+I metodi forniti forniti dalle AWS SDK per Java \cite{AwsJavaSDK} permettono di ottenere l'endpoint del database di interesse fornendo come parametro di input il nome dell'istanza RDS, Listato~\ref{lst:awsDbJava}. Il risultato consiste nella stringa di connessione che può essere utilizzata dal connettore \textit{JDBC}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice Java generato per la variabile di tipo sql su ambiente AWS per ottenere l'endpoint del database.}, label={lst:awsDbJava}]
+static AmazonRDS __rds_cloudAws = AmazonRDSClient.builder()
+	.withCredentials(new AWSStaticCredentialsProvider(cloudAws))
+	.withRegion("eu-west-2")
+	.build();
+	
+[...]
+
+DescribeDBInstancesRequest __request_dbConnAws = new DescribeDBInstancesRequest().withDBInstanceIdentifier("nomeIstanza");
+
+DescribeDBInstancesResult __response_dbConnAws = __rds_cloudAws.describeDBInstances(__request_dbConnAws);
+
+List<DBInstance> __listInstance_dbConnAws = __response_dbConnAws.getDBInstances();
+
+Endpoint __endpoint_dbConnAws = __listInstance_dbConnAws.get(0).getEndpoint();
+
+[...]
+
+\end{lstlisting}
+
+\subsubsection{JavaScript}
+Le AWS SDK per JavaScript \cite{AwsJsSDK} contengono a loro volta i metodi per interagire con RDS. Anche in questo caso basta fornire il nome dell'istanza su cui è in esecuzione il database per ottenere il suo endpoint che può essere usato normalmente dai metodi della libreria \textit{mysql}, Listato~\ref{lst:awsDbJs}.\\
+La libreria \textit{util} risulta necessaria anche in questo frangente al fine di accedere ai servizi su AWS tramite chiamate asincrone. \\
+
+\begin{lstlisting}[language=Java,caption={Codice JavaScript generato per la variabile di tipo sql su ambiente AWS per ottenere l'endpoint del database.}, label={lst:awsDbJs}]
+var __rds = new __AWS.RDS();
+
+[...]
+
+var __params_dbConnAws = {
+	  DBInstanceIdentifier: "nomeIstanza"
+};
+	
+const __getEndpoint_dbConnAws = __util.promisify(__rds.describeDBInstances).bind(__rds);
+
+var __instances_dbConnAws = await __getEndpoint_dbConnAws(__params_dbConnAws);
+
+var __endpoint_dbConnAws = __instances_dbConnAws.DBInstances[0].Endpoint.Address;
+\end{lstlisting}
+
+\subsubsection{Python}
+Le AWS SDK per Python sono fornite dalla libreria \textit{boto3} \cite{AwsPySDK} che, tramite il nome dell'istanza a cui appartiene il database, permette di ottenerne l'endpoint da usare all'interno dei metodi della libreria \textit{PyMySQL}, Listato~\ref{lst:awsDbPy}.\\
+
+\begin{lstlisting}[language=Python,caption={Codice Python generato per la variabile di tipo sql su ambiente AWS per ottenere l'endpoint del database.}, label={lst:awsDbPy}]
+rds = boto3.client('rds')
+
+[...]
+
+__getEndpoint_dbConnAws = rds.describeDBInstances(DBInstanceIdentifier='nomeIstanza')
+
+__endpoint_dbConnAws = __instances_dbConnAws.get('DBInstances')[0].get('Endpoint').get('Address')
+\end{lstlisting}
+
+\subsection{Azure for MySQL}
+Microsoft Azure offre una vasta gamma di servizi che seguono il modello DBaaS, corredandoli di numerosi funzionalità \cite{AzureDB}. Nello specifico per la gestione di database basati su MySQL è possibile utilizzare il servizio Azure Database for MySQL che consente l’utilizzo di diversi linguaggi e framework open-source, lavorando in completa integrazione con gli altri servizi di Azure. Esso consente di creare database MySQL con pochissima amministrazione e senza la necessità di investire tempo e risorse nella gestione delle macchine virtuali e dell'infrastruttura sottostante, fornendo diversi gradi di servizio ognuno con diversi livelli di prestazioni e la possibilità di scalare in base alle proprie esigenze \cite{AzureMySQL}. \\
+Le SDK di Azure soffrono di alcune problematiche derivanti sia da una difficile integrazione al di fuori dell’IDE \textit{VisualStudio Code}, sia dalla mancanza di funzionalità per gran parte dei servizi. Per questo motivo il supporto ad Azure all'interno di Fly sfrutta un servizio REST API che prescinde dal linguaggio di programmazione in quanto basato su operazioni HTML. Le \textbf{Representational State Transfer (REST) API} consistono in un insieme di endpoint che forniscono l'accesso alle principali operazioni di ogni servizio di Azure. Il loro utilizzo è regolato attraverso l'ottenimento di un token di accesso fornito dal servizio Azure Active Directory tramite l'uso delle proprie credenziali di accesso, ID, Password e TenantID \cite{azureAD}. \\
+Il programma Java generato dal compilatore Fly fa uso di una specifica libreria appositamente progettata per l'accesso ai servizi di Azure mediante REST API, come descritto in precedenza. Allo stesso modo per le funzioni Fly scritte in JavaScript è stata utilizzata la medesima logica, ovvero viene prima ottenuto il token di autorizzazione ed in seguito si inoltra la richiesta HTTP verso il servizio Azure for MySQL.\\
+
+\subsubsection{Java}
+La libreria \textit{AzureClient} raccoglie i metodi per accedere ai vari servizi di Azure ed in generale per interagire con l'ambiente su Cloud, pertanto anche la funzione per ottenere l'endpoint del database mediante il servizio Azure for MySQL è stata introdotta al suo interno. Il codice Java utilizzato è visibile nel Listato~\ref{lst:azureDbJava}, esso dà come risultato la stringa di connessione del database utilizzabile tramite i driver \textit{JDBC}.\\
+\newpage
+
+\begin{lstlisting}[language=Java,caption={Codice Java appartenente alla libreria AzureClient per l'ottenimento dell'endpoint del database.}, label={lst:azureDbJava}]
+public String getDBEndpoint(String resourceGroupName, String instance) throws IOException {
+    String token = getOAuthToken();
+    
+    URL url = new URL("https://management.azure.com/subscriptions/" 
+    + subscriptionId
+    + "/resourceGroups/" + resourceGroupName 
+    + "/providers/Microsoft.DBforMySQL/servers/" 
+    + instance + "?api-version=2017-12-01"
+    );
+    
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();	
+    
+    // Set connections properties
+    connection.setDoOutput(true);
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Authorization", "Bearer " + token);
+    connection.setRequestProperty("Accept", "application/json");
+    
+    Gson gson = new GsonBuilder().create();
+    JsonReader jsonReader = gson.newJsonReader(new InputStreamReader(connection.getInputStream()));
+    JsonObject jsonObj = new JsonParser().parse(jsonReader).getAsJsonObject();
+    
+    String dbEndpoint = jsonObj.getAsJsonObject("properties").get("fullyQualifiedDomainName").getAsString();
+    
+    return dbEndpoint;
+}
+\end{lstlisting}
+
+\subsubsection{JavaScript}
+La libreria \textit{axios} \cite{axios} viene utilizzata per inviare le richieste HTTP necessarie per l'utilizzo delle REST API in maniera asincrona sfruttando la libreria \textit{qs} \cite{qs} per gestire le stringhe al suo interno. Similmente alla libreria Java \textit{AzureClient} la prima operazione utilizza i dati di accesso dell'utente per ottenere il token di autorizzazione per poi ottenere l'endpoint del database fornendo in input il nome del ResourceGroup e dell'istanza, Listato~\ref{lst:azureDbJs}.\\
+
+\begin{lstlisting}[language=Java,caption={Codice JavaScript generato per la variabile di tipo sql su ambiente Azure per ottenere l'endpoint del database.}, label={lst:azureDbJs}]
+var __axios = require("axios");
+
+var __qs = require("qs");
+
+[...]
+
+let __scope = "https://management.azure.com/.default";
+
+let __urlToken ="https://login.microsoftonline.com/" + "'${tenant}'" + "/oauth2/v2.0/token";
+
+const __postData = {
+    grant_type: "client_credentials",
+    client_id: "user",
+    client_secret: "secret_key",
+    scope: __scope
+};
+
+__axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+var __reqToken = await __axios.post(__urlToken, __qs.stringify(__postData));
+    
+var __token = __reqToken.data.access_token;
+
+[...]
+
+var __urldbConnAz = "https://management.azure.com/subscriptions/" + "subscription_id" + "/resourceGroups/" + "nomeResourceGroup" + "/providers/Microsoft.DBforMySQL/servers/" + "nomeIstanza" + "?api-version=2017-12-01"
+
+const config = {
+    method: "get",
+    headers: {
+        Authorization: "Bearer " + __token,
+        Accept: "application/json"
+    }
+}
+
+var __resdbConnAz = await __axios.get(__urldbConnAz, config);
+
+var __endpointdbConnAz = __resdbConnAz.data.properties.fullyQualifiedDomainName;
+
+\end{lstlisting}
+
+\section{Caso d'uso}
+Il Listato~\ref{lst:dbInteraction} mostra il codice di un programma Fly per il calcolo della temperatura media delle province della Campania basandosi sulle temperature dei comuni che ne fanno parte, il tutto utilizzando funzioni Fly in JavaScript su ambiente Azure.\\
+Mediante l'utilizzo dell'entità \verb|dataframe|, Riga 7, si accede ad un database locale in cui sono contenuti i dati delle temperature dei singoli comuni che vengono esportati in un file CSV usando il metodo \verb|export()|, Riga 11. Un'apposita query di update sfrutta tale file per caricare i dati all'interno di un database su Azure, Riga 13-20, da cui vengono estratte le province e memorizzate in una variabile, Riga 26. A questo punto viene lanciata la prima funzione Fly adibita all'inserimento della media all'interno del database su Cloud la quale prende come parametro la lista delle province precedentemente ottenute, Riga 28.\\
+Il compilatore Fly suddivide automaticamente le province contenute nella variabile \verb|dataframe| in base al numero di funzioni che vengono lanciate, fornendo ad ognuna di esse un sottoinsieme di province. La singola funzione crea prima una connessione al database su Azure per poi utilizzare una query di aggregazione per calcolare, per ogni provincia presente nella lista ottenuta come parametro, la media delle temperature dei comuni di appartenenza, Riga 33-37. Tale valore viene poi inserito dalla stessa funzione all'interno di una nuova tabella utilizzando una query di inserimento, Riga 39-43.\\
+La funzione di callback, dichiarata a seguito della parola chiave \verb|thenall|, ha lo scopo di verificare il corretto inserimento dei dati andando a stampare tutti i valori contenuti nella tabella appena riempita, contenente la temperatura media delle province, Riga 50-52.\\
+
+\begin{lstlisting}[language=FLY,caption={Calcolo della temperatura media delle province della Campania su Azure utilizzando funzioni Serverless in JavaScript.}, label={lst:dbInteraction}]
+var local = [type="smp",nthread=2]
+
+var cloudAz = [type="azure", clientID="client_id", tenantID="tenant_id", secret_key="secret_key", subscriptionID="subscription_id", region="region", language="nodejs", threads=2, seconds=300]
+
+var dbConnLocal = [type="sql", dbName="flyDB", user="user", password="password"] on local
+
+var tableImport = [type="dataframe", name="temperaturacomune", source=dbConnLocal]
+
+var fileCSV = [type="file", name="temperaturacomune", path="/home/temperaturacomune.csv", ext="csv"]
+
+tableImport.export(fileCSV)
+
+var dbConnAz = [type="sql", resourceGroup='flyrg', instance='fly', dbName="testfly", user="user@fly", password="password"] on cloudAz
+
+var queryStrImport = "LOAD DATA LOCAL INFILE '" + fileCSV.getAbsolutePath() as String + 
+"' INTO TABLE temperaturacomune FIELDS terminated by ',' lines terminated by '\\\\n'"
+
+var queryStmtImport = [type="query", query_type="update", connection=dbConnAz, statement=queryStrImport]
+
+queryStmtImport.execute()
+
+var queryStrCol = "SELECT DISTINCT provincia FROM temperaturacomune"
+
+var queryStmtCol = [type="query", query_type="select", connection=dbConnAz, statement=queryStrCol]
+
+var columns = queryStmtCol.execute()
+
+func insertAvg (columns){
+    
+    var dbConnAz = [type="sql", resourceGroup='flyrg', instance='fly', dbName="testfly", user="user@fly", password="password"] on cloudAz
+    
+    for x in columns{
+        var queryStrAvg = "SELECT AVG(temperatura) FROM temperaturacomune WHERE provincia = \\\"" + x[0] as String + "\\\""
+        
+        var queryStmtAvg = [type="query", query_type="value", connection=dbConnAz, statement=queryStrAvg]
+        
+        var avg = queryStmtAvg.execute()
+        
+        var queryStrIns = "INSERT INTO temperaturaprovincia (temperatura, provincia) VALUES ( \\\"" + avg as String + "\\\", \\\"" + x[0] as String + "\\\")"
+        
+        var queryStmtIns = [type="query", query_type="update", connection=dbConnAz, statement=queryStrIns]
+        
+        queryStmtIns.execute()
+    }
+}
+
+func checkIns (){  
+    var dbConnAz = [type="sql", resourceGroup='flyrg', instance='fly', dbName="testfly", user="user@fly", password="password"] on cloudAz
+    
+    var newTable = [type="dataframe", name="temperaturaprovincia", source=dbConnAz]
+    
+    println(newTable)
+}
+
+fly insertAvg in columns on cloudAz thenall checkIns
+\end{lstlisting}
