@@ -15,7 +15,7 @@ Un cluster Kubernetes è un insieme di macchine, chiamate nodi, che eseguono car
 \end{figure}
 
 \subsection{Componenti del Control Plane}
-Il Kubernetes Control Plane è il centro nevralgico delle operazioni del cluster. È costituito da una serie di componenti, in esecuzione all'interno del cluster, che hanno il compito di garantire l'integritá esecutiva del cluster come ad esempio lo scheduling dei Worker Node e la gestione dei possibili failures dei Pod.
+Il Kubernetes Control Plane è il centro nevralgico delle operazioni del cluster. È costituito da una serie di componenti, in esecuzione all'interno del cluster, che hanno il compito di garantire l'integritá esecutiva del cluster come ad esempio lo scheduling dei Worker Node e la gestione dei possibili errori dei Pod.
 \begin{itemize}
     \item\textbf{kube-apiserver}
     kube-apiserver è il server API per il cluster Kubernetes. È il punto di contatto centrale a cui accedono tutti gli utenti, l'automazione e i componenti nel cluster Kubernetes. Il server API implementa un'API RESTful su HTTP, esegue tutte le operazioni API ed è responsabile dell'archiviazione degli oggetti API in un backend di archiviazione persistente.
@@ -36,22 +36,37 @@ Il Kubernetes Control Plane è il centro nevralgico delle operazioni del cluster
     Un componente della control plane di Kubernetes che aggiunge logiche di controllo specifiche per il cloud. Il cloud-controller-manager ti permette di collegare il tuo cluster con le API del cloud provider e separa le componenti che interagiscono con la piattaforma cloud dai componenti che interagiscono solamente col cluster.
     Il cloud-controller-manager esegue dei controller specifici del tuo cloud provider. Se hai una installazione Kubernetes on premises, o un ambiente di laboratorio nel tuo PC, il cluster non ha un cloud-controller-manager.
     Come nel kube-controller-manager, il cloud-controller-manager combina diversi control loop logicamente indipendenti in un singolo binario che puoi eseguire come un singolo processo. Tu puoi scalare orizzontalmente (eseguire più di una copia) per migliorare la responsività o per migliorare la tolleranza ai fallimenti.
-    
-    I seguenti controller hanno dipendenze verso implementazioni di specifici cloud provider:
-
-    Node Controller: Per controllare se sul cloud provider i nodi che hanno smesso di rispondere sono stati cancellati
-    Route Controller: Per configurare le network route nella sottostante infrastruttura cloud
-    Service Controller: Per creare, aggiornare ed eliminare i load balancer del cloud provider
-
 \end{itemize}
 \subsection{Componenti del Worker Node}
 Il Worker Node è il nodo del cluster su cui viene eseguito effettivamente l'applicazione. Su ogni nodo di tipo Worker Node vengono eseguiti tre componenti di Kubernetes.
 \begin{itemize}
     \item{kubelet}
-     kubelet è un agente che è sempre in esecuzione su ogni Worker Node e ha come compito quello di controllare il ciclo di vita dei container all'interno dei Pod. La kubelet riceve un set di specifiche definite in fase di deployment dall'utente  e si assicura che i container rispettino tali specifiche.
+    La componente kubelet è un agente che è sempre in esecuzione su ogni Worker Node e ha come compito quello di controllare il ciclo di vita dei container all'interno dei Pod. La kubelet riceve un set di specifiche definite in fase di deployment dall'utente  e si assicura che i container rispettino tali specifiche.
     \item{kube-proxy}
-    kube-proxy e' un proxy eseguito su ogni Nodo, ossia un particolare componente che consente di identificare i nodi all'interno della rete del cluster e permette che essi possano comunicare sia all'interno che all'esterno del cluster.
+    La componente kube-proxy è un proxy eseguito su ogni Nodo, ossia un particolare componente che consente di identificare i nodi all'interno della rete del cluster e permette che essi possano comunicare sia all'interno che all'esterno del cluster.
     \item{Container Runtime} il Container Runtime è il software responsabile dell'esecuzione dei container. Kubernetes supporta tutte le implementazioni di Kubernetes CRI (Container Runtime Interface) come ad esempio Docker e containerd.
 \end{itemize}
-\subsection{Oggetti di Kubernetes}
-Kubernetes offre una varietà di oggetti per definire le specifiche del proprio sistema. Questi oggetti costituiscono entità persistenti per rappresentare lo stato del cluster, quali applicazioni sono in esecuzione e su quali nodi, le risorse da allocare e le politiche da adottare. Per istanziare un oggetto con le direttive e le informazioni decise, si utilizza spesso un file YAML oppure un file JSON.
+\subsection{Oggetti Kubernetes}
+Kubernetes offre una varietà di oggetti per definire le specifiche del proprio sistema. Questi oggetti costituiscono entità persistenti per rappresentare lo stato del cluster, quali applicazioni sono in esecuzione e su quali nodi, le risorse da allocare e le politiche da adottare. Per istanziare un oggetto con le direttive e le informazioni desiderate, si utilizza spesso un file di tipo YAML oppure JSON.
+Ciascun oggetto è caratterizzato da due campi che ne descrivono la configurazione: \\\\
+\textbf{Specifiche} Le specifiche descrivono lo stato desiderato dell'oggetto, cioè le caratteristiche che deve assumere. \\\\
+\textbf{Stato} Lo stato descrive lo stato attuale dell'oggetto e viene automaticamente aggiornato da Kubernetes.
+\begin{itemize}
+    \item\textbf{Pod}
+    Un Pod costituisce la più semplice, piccola e basilare unità di esecuzione in Kubernetes. La sua natura funzionale è quella di incapsulare uno o più container e di condividerne le risorse del cluster come ad esempio l'archiviazione dei dati e le risorse di rete.
+    I Pod generalmente non vengono creati direttamente in Kubernetes perchè questi sono considerati oggetti effimeri. Solitamente i Pod vengono creati e gestiti da controller di più alto livello come Deployment, StatefulSet o DaemonSet.
+    \item\textbf{Deployment}
+    L'oggetto Deployment si occupa di creare e gestire il ciclo di vita di uno o più Pod e dei ReplicaSet.
+    Un Deployment fornisce un approccio dichiarativo per la creazione e la modifica di Pod e ReplicaSet, con esso è possibile dunque descrivere lo stato che il Pod deve assumere ed il Deployment Controller si occuperà di aggiornare lo stato attuale con quello desiderato.
+    \item\textbf{ReplicaSet}
+    Un ReplicaSet ha il compito specifico di mantenere attive una o più copie di un Pod. Questo meccanismo garantisce la piena disponibilità del Pod a cui il ReplicaSet è agganciato in quanto nel momento in cui un Pod, per un qualsiasi motivo, cessa il suo funzionamento, verrà sostituito da una sua esatta copia.
+    \item\textbf{Service}
+    I Pod in Kubernetes sono entità effimere, essi vengono creati e distrutti in base allo stato desiderato del cluster. Per natura quindi non hanno un'identificazione statica all'interno della rete del cluster, ad ogni pod viene assegnato un indirizzo IP dinamico che varia nel tempo.
+    Un Service in Kubernetes costituisce un'astrazione che definisce un insieme logico di Pod e una politica con cui accedervi.
+    Kubernetes offre diversi tipi di Service:
+        \subitem\textbf{ClusterIP} Espone il Service con un indirizzo IP interno al cluster, rendendo il cluster raggiungibile solo dall'interno del cluster stesso.
+        \subitem\textbf{NodePort} Espone il Service su ciascun indirizzo IP corrispondente ad un nodo del cluster, su una porta scelta automaticamente, uguale per tutti i nodi.
+        \subitem\textbf{LoadBalancer} Permette di esporre le applicazioni all'esterno del cluster.
+    \item\textbf{Job}
+    Un oggetto di tipo Job permette di eseguire e gestire task complessi all'interno del cluster. Un Job infatti permette di eseguire un insieme di Pod in maniera sequenziale o addirittura parallela considerandoli come un'unica attività di lavoro da portare a termine. Il Job terrà in esecuzione l'attività fino a quando un numero specifico di Pod non verrà terminato correttamente. Quando viene raggiunto un numero specifico di completamenti riusciti, l'attività è completata. L'eliminazione del Job distruggerà tutti i Pod creati. 
+\end{itemize}
