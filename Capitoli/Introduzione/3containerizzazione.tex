@@ -1,15 +1,15 @@
 %!TEX root = ../../00main.tex
 
 \section{Containerizzazione}
-
-\subsection{Panoramica}
+Le prime applicazioni realizzate in informatica venivano eseguite ognuna su una macchina fisica dedicata, con conseguenti costi durante le fasi di acquisto, configurazione e manutenzione e con il rischio di non sfruttare mai completamente le risorse allocate.
+La \textit{virtualizzazione hardware} ha risolto tale problema, permettendo di allocare e condensare i servizi su poche macchine server fisiche, portando ad una riduzione dei costi e migliorando sopratutto la manutenibilità di tali architetture. un software particolare, noto come hypervisor è responsabile del collegamento con l'hardware e permette di condividere un singolo sistema host fisico tra diversi ambienti, separati e ben distingi  
 Con il termine containerizzazione si intende una para-virtualizzazione dell'ambiente applicativo che consente di eseguire software, librerie, dipendenze e tutte le componenti necessarie, in un processo isolato che prende il nome di contenitore. Esso può essere considerato un vero e proprio eseguibile che non dipende da alcuna sorgente esterna. Questo lo rende estremamente portatile e affidabile in quanto può essere eseguito e trasferito in ogni tipo di ambiente e d'infrastruttura.
 L'idea alla base del paradigma non è in realtà nuova in quanto sfrutta una funzionalità del kernel Linux presente già dalla versione 2.6.24 che permette l'isolamento e la gestione delle risorse di uno o più processi.
 
 \subsection{Vantaggi}
 L'utilizzo di questa tecnologia ha rivoluzionato il modus operandi del settore IT, dello sviluppo software e della loro distribuzione su infrastrutture Cloud. Questo grazie a tre principali vantaggi:
 \begin{itemize}
-\item \textbf{Portabilità} - Date le sue caratteristiche, un'applicazione containerizzata è per natura adattabile ed eseguibile in ogni tipo di ambiente. 
+\item \textbf{Portabilità} - Poichè un container contiene tutte le componenti necessarie all'esecuzione dell'applicazione ed è un processo isolato del sistema ospitante, 
 \item \textbf{Efficienza} - I contenitori hanno la capacità di condividere il kernel della macchina ospitante evitando così di dover disporre di risorse hardware e software dedicate.
 \item \textbf{Ottimizzazione dello spazio} - L'immagine dell'applicazione che viene eseguita all'interno del contenitore, incapsula solo ed unicamente le componenti e le informazioni necessarie alla sua esecuzione.
 \item \textbf{Ambienti di sviluppo innovativi} - Una nuova strategia di sviluppo che si sta affermando negli ultimi anni è quella del DevOps e la containerizzazione è un punto cardine di questo nuovo paradigma. Per la natura stessa dei contenitori, gli sviluppatori possono condividere facilmente il loro software, eliminando così problemi di compatibilità dettati da ambienti di sviluppo e di esecuzione differenti. 
