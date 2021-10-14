@@ -1,0 +1,1335 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{RDS}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Amazon RDS - Amazon Web Services}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/rds/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/rds/
+      \endverb
+    \endentry
+    \entry{SQS}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Amazon Simple Queue Service - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/sqs/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/sqs/
+      \endverb
+    \endentry
+    \entry{S3}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Amazon Simple Storage Service - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/s3/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/s3/
+      \endverb
+    \endentry
+    \entry{AmazonSite}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Amazon Web Services (AWS)}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/
+      \endverb
+    \endentry
+    \entry{MODAClouds}{article}{}
+      \name{author}{12}{}{%
+        {{hash=975e4c9a849da753d46e05789f64eebb}{%
+           family={Ardagna},
+           familyi={A\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=90cae61e2f9c8fc1b471c43e48a72160}{%
+           family={Nitto},
+           familyi={N\bibinitperiod},
+           given={E.\bibnamedelimi Di},
+           giveni={E\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=a2033c38c435f7d5b245896f9b19b87d}{%
+           family={Mohagheghi},
+           familyi={M\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1c90de1669f1a77dc2fed571835c1b2c}{%
+           family={Mosser},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=daff929024f59d194986a51edc500292}{%
+           family={Ballagny},
+           familyi={B\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9f5bbafb0c0560b7be0f5204eb4deee9}{%
+           family={D'Andria},
+           familyi={D\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=961f2f9617eba5e13a0da49330d1c1d3}{%
+           family={Casale},
+           familyi={C\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=204617a0adbad6b3b466d70d538478cf}{%
+           family={Matthews},
+           familyi={M\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=74df1cd9de1bf0c718024b5112c71b9b}{%
+           family={Nechifor},
+           familyi={N\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c3857da93ddae5c7259486914e175922}{%
+           family={Petcu},
+           familyi={P\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=f0099fa9e8b92c25f2e1db2eb7a7a439}{%
+           family={Gericke},
+           familyi={G\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9a9684bf5f69fe31fa4fe7880fa935bd}{%
+           family={Sheridan},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{c778e3cc0855f674ebfb2fc232f5a63a}
+      \strng{fullhash}{a95fd6e896ba9747a4e6d771cc96a440}
+      \strng{bibnamehash}{c778e3cc0855f674ebfb2fc232f5a63a}
+      \strng{authorbibnamehash}{c778e3cc0855f674ebfb2fc232f5a63a}
+      \strng{authornamehash}{c778e3cc0855f674ebfb2fc232f5a63a}
+      \strng{authorfullhash}{a95fd6e896ba9747a4e6d771cc96a440}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2012 4th International Workshop on Modeling in Software Engineering (MISE)}
+      \field{title}{MODAClouds: A model-driven approach for the design and execution of applications on multiple Clouds}
+      \field{year}{2012}
+    \endentry
+    \entry{awsCLI}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS Command Line Interface - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/cli/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/cli/
+      \endverb
+    \endentry
+    \entry{IAM}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS Identity and Access Management - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/iam/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/iam/
+      \endverb
+    \endentry
+    \entry{LambdaSite}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS Lambda - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/lambda/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/lambda/
+      \endverb
+    \endentry
+    \entry{awsSDK}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS SDK - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/tools/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/tools/
+      \endverb
+    \endentry
+    \entry{axios}{online}{}
+      \field{sortinit}{a}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{axios - npm}
+      \verb{urlraw}
+      \verb https://www.npmjs.com/package/axios
+      \endverb
+      \verb{url}
+      \verb https://www.npmjs.com/package/axios
+      \endverb
+    \endentry
+    \entry{azureAD}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Azure Active Directory | Microsoft Azure}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/it-it/services/active-directory/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/it-it/services/active-directory/
+      \endverb
+    \endentry
+    \entry{azureCLI}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Azure Command Line Interface | Microsoft Azure}
+      \verb{urlraw}
+      \verb https://docs.microsoft.com/it-it/cli/azure/?view=azure-cli-latest
+      \endverb
+      \verb{url}
+      \verb https://docs.microsoft.com/it-it/cli/azure/?view=azure-cli-latest
+      \endverb
+    \endentry
+    \entry{Cosmos}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Azure Cosmos DB | Microsoft Azure}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/it-it/services/cosmos-db/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/it-it/services/cosmos-db/
+      \endverb
+    \endentry
+    \entry{azureFunction}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Azure Function | Microsoft Azure}
+      \verb{urlraw}
+      \verb https://docs.microsoft.com/it-it/azure/azure-functions/
+      \endverb
+      \verb{url}
+      \verb https://docs.microsoft.com/it-it/azure/azure-functions/
+      \endverb
+    \endentry
+    \entry{FunctionSite}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{Azure Functions | Microsoft Azure}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/it-it/services/functions/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/it-it/services/functions/
+      \endverb
+    \endentry
+    \entry{AwsPySDK}{online}{}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labeltitlesource}{title}
+      \field{title}{Boto3 SDK AWS per Python - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/sdk-for-python/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/sdk-for-python/
+      \endverb
+    \endentry
+    \entry{CAMELSite}{online}{}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labeltitlesource}{title}
+      \field{title}{CAMEL}
+      \verb{urlraw}
+      \verb http://camel-dsl.org/
+      \endverb
+      \verb{url}
+      \verb http://camel-dsl.org/
+      \endverb
+    \endentry
+    \entry{LambdaConfiguration}{online}{}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labeltitlesource}{title}
+      \field{title}{Configuration functions in the AWS Lambda Console}
+      \verb{urlraw}
+      \verb https://docs.aws.amazon.com/lambda/latest/dg/configuration-console.html
+      \endverb
+      \verb{url}
+      \verb https://docs.aws.amazon.com/lambda/latest/dg/configuration-console.html
+      \endverb
+    \endentry
+    \entry{ISISLab}{article}{}
+      \name{author}{5}{}{%
+        {{hash=af8ea8d2d9ac2e6d027b7bef0caf929b}{%
+           family={Cordasco},
+           familyi={C\bibinitperiod},
+           given={Gennaro},
+           giveni={G\bibinitperiod}}}%
+        {{hash=598986915a6b6c3bdbb455d756627e77}{%
+           family={D'Auria},
+           familyi={D\bibinitperiod},
+           given={Matteo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e879824a0d4f5f8669a47e14bf7f62e8}{%
+           family={Negro},
+           familyi={N\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4a78b581b50a4a4c832d3dd8c0939fb6}{%
+           family={Scarano},
+           familyi={S\bibinitperiod},
+           given={Vittorio},
+           giveni={V\bibinitperiod}}}%
+        {{hash=32b79dfaf5e54d9131b327da6f8f89bf}{%
+           family={Spagnuolo},
+           familyi={S\bibinitperiod},
+           given={Carmine},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{dc9225576b9b2186a84cf8b448e14e75}
+      \strng{fullhash}{63c87867dba43d51be077f9c6eef1e95}
+      \strng{bibnamehash}{dc9225576b9b2186a84cf8b448e14e75}
+      \strng{authorbibnamehash}{dc9225576b9b2186a84cf8b448e14e75}
+      \strng{authornamehash}{dc9225576b9b2186a84cf8b448e14e75}
+      \strng{authorfullhash}{63c87867dba43d51be077f9c6eef1e95}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Concurrency and Computation: Practice and Experience}
+      \field{title}{Toward a domain-specific language for scientific workflow-based applications on multicloud system}
+      \field{year}{2020}
+    \endentry
+    \entry{AzureDB}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Database di Azure | Microsoft Azure}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/it-it/product-categories/databases/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/it-it/product-categories/databases/
+      \endverb
+    \endentry
+    \entry{AwsDb}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Database in AWS - Amazon Web Services}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/products/databases/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/products/databases/
+      \endverb
+    \endentry
+    \entry{AzureMySQL}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Database MySQL | Microsoft Azure}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/it-it/services/mysql/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/it-it/services/mysql/
+      \endverb
+    \endentry
+    \entry{dataframejs}{online}{}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{dataframe-js}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://gmousse.gitbooks.io/dataframe-js/
+      \endverb
+      \verb{url}
+      \verb https://gmousse.gitbooks.io/dataframe-js/
+      \endverb
+    \endentry
+    \entry{docker}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Docker}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.docker.com/
+      \endverb
+      \verb{url}
+      \verb https://www.docker.com/
+      \endverb
+    \endentry
+    \entry{dockerCompose}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Docker Compose}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.docker.com/compose/
+      \endverb
+      \verb{url}
+      \verb https://docs.docker.com/compose/
+      \endverb
+    \endentry
+    \entry{dynalite}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Dynalite}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/mhart/kinesalite
+      \endverb
+      \verb{url}
+      \verb https://github.com/mhart/kinesalite
+      \endverb
+    \endentry
+    \entry{MultiCloud}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e715754d0708a31b7872830e6996da05}{%
+           family={Ferrer},
+           familyi={F\bibinitperiod},
+           given={Ana\bibnamedelima Juan},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=41df8bb87f423ae28205b90f385394ed}{%
+           family={Pérez},
+           familyi={P\bibinitperiod},
+           given={David\bibnamedelima García},
+           giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=6d5da91b2c9786f82ed025002b14dfb6}{%
+           family={González},
+           familyi={G\bibinitperiod},
+           given={Román\bibnamedelima Sosa},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{a730b144df5393224dc650560f756e9c}
+      \strng{fullhash}{a730b144df5393224dc650560f756e9c}
+      \strng{bibnamehash}{a730b144df5393224dc650560f756e9c}
+      \strng{authorbibnamehash}{a730b144df5393224dc650560f756e9c}
+      \strng{authornamehash}{a730b144df5393224dc650560f756e9c}
+      \strng{authorfullhash}{a730b144df5393224dc650560f756e9c}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Procedia Computer Science}
+      \field{note}{2nd International Conference on Cloud Forward: From Distributed to Complete Computing}
+      \field{title}{Multi-cloud Platform-as-a-service Model, Functionalities and Approaches}
+      \field{volume}{97}
+      \field{year}{2016}
+      \true{nocite}
+      \field{pages}{63\bibrangedash 72}
+      \range{pages}{10}
+    \endentry
+    \entry{forrester}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=ee5963dc1b0c0e112067e60405c742e7}{%
+           family={Gene\bibnamedelima Leganza},
+           familyi={G\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Noel\bibnamedelima Yuhanna},
+           giveni={N\bibinitperiod\bibinitdelim Y\bibinitperiod},
+           prefix={with},
+           prefixi={w\bibinitperiod}}}%
+        {{hash=48aadd246f1bab3cdba23a83d42478a4}{%
+           family={Vale},
+           familyi={V\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{77eaaf048d156ef93915194ca23f9add}
+      \strng{fullhash}{77eaaf048d156ef93915194ca23f9add}
+      \strng{bibnamehash}{77eaaf048d156ef93915194ca23f9add}
+      \strng{authorbibnamehash}{77eaaf048d156ef93915194ca23f9add}
+      \strng{authornamehash}{77eaaf048d156ef93915194ca23f9add}
+      \strng{authorfullhash}{77eaaf048d156ef93915194ca23f9add}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Forrester Wave: Database-As-A-Service, Q2 2019}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{Grieco}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=6e1971ca3dc048d6d44bfc13b219e757}{%
+           family={Grieco},
+           familyi={G\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \strng{fullhash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \strng{bibnamehash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \strng{authorbibnamehash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \strng{authornamehash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \strng{authorfullhash}{6e1971ca3dc048d6d44bfc13b219e757}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Progettazione e implementazione del supporto a Microsoft Azure per il compilatore del linguaggio FLY}
+      \field{year}{2019}
+    \endentry
+    \entry{MELODIC}{article}{}
+      \name{author}{2}{}{%
+        {{hash=5d4fd5098a1a7b81cb6a81ee28fe1c06}{%
+           family={Horn},
+           familyi={H\bibinitperiod},
+           given={Geir},
+           giveni={G\bibinitperiod}}}%
+        {{hash=43b2897fbc5f19f94ebecf2604cab978}{%
+           family={Skrzypek},
+           familyi={S\bibinitperiod},
+           given={Pawel},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{101a6561faede46d664fe783df028ae7}
+      \strng{fullhash}{101a6561faede46d664fe783df028ae7}
+      \strng{bibnamehash}{101a6561faede46d664fe783df028ae7}
+      \strng{authorbibnamehash}{101a6561faede46d664fe783df028ae7}
+      \strng{authornamehash}{101a6561faede46d664fe783df028ae7}
+      \strng{authorfullhash}{101a6561faede46d664fe783df028ae7}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2018 32nd International Conference (WAINA)}
+      \field{title}{MELODIC: Utility Based Cross Cloud Deployment Optimisation}
+      \field{year}{2018}
+    \endentry
+    \entry{CloudBook}{book}{}
+      \name{author}{3}{}{%
+        {{hash=8c5f0550320902721b6c01fd75e428d4}{%
+           family={Hwang},
+           familyi={H\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=349046101cd0225b02284677da92b73c}{%
+           family={Fox},
+           familyi={F\bibinitperiod},
+           given={G.C.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9421738c4a3d5dfbbb7f3cbb7f5559bc}{%
+           family={Dongarra},
+           familyi={D\bibinitperiod},
+           given={J.J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \strng{fullhash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \strng{bibnamehash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \strng{authorbibnamehash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \strng{authornamehash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \strng{authorfullhash}{fe8fc55f94293c6e00cdcbe5ae9028f2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Morgan Kaufmann}
+      \field{title}{Distributed and Cloud Computing: From Parallel Processing to the Internet of Things}
+      \field{year}{2012}
+      \true{nocite}
+    \endentry
+    \entry{JavaScriptSite}{online}{}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labeltitlesource}{title}
+      \field{title}{JavaScript}
+      \verb{urlraw}
+      \verb https://developer.mozilla.org/it/docs/Web/JavaScript
+      \endverb
+      \verb{url}
+      \verb https://developer.mozilla.org/it/docs/Web/JavaScript
+      \endverb
+    \endentry
+    \entry{jdbc}{online}{}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labeltitlesource}{title}
+      \field{title}{JDBC | MySQL Connector}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.mysql.com/it/products/connector/
+      \endverb
+      \verb{url}
+      \verb https://www.mysql.com/it/products/connector/
+      \endverb
+    \endentry
+    \entry{ServerlessBerkley}{article}{}
+      \name{author}{14}{}{%
+        {{hash=7af488de76c1715252e4860b1397404f}{%
+           family={Jonas},
+           familyi={J\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=341ecec39cf9ad2bb8c208b8329a16f9}{%
+           family={Schleier-Smith},
+           familyi={S\bibinithyphendelim S\bibinitperiod},
+           given={Johann},
+           giveni={J\bibinitperiod}}}%
+        {{hash=50498d475ca405fc9d9bd3aefddbc652}{%
+           family={Sreekanti},
+           familyi={S\bibinitperiod},
+           given={Vikram},
+           giveni={V\bibinitperiod}}}%
+        {{hash=9e8fa03ae568f54c46b201ef17fe0fac}{%
+           family={Tsai},
+           familyi={T\bibinitperiod},
+           given={Chia-Che},
+           giveni={C\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=83f85c89dcc4e90d7eb9336d4ad5f84f}{%
+           family={Khandelwal},
+           familyi={K\bibinitperiod},
+           given={Anurag},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3535880f25d52affb24a2a6e8a483e48}{%
+           family={Pu},
+           familyi={P\bibinitperiod},
+           given={Qifan},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=48b89c36aefc0955246ae5b5c0f63d45}{%
+           family={Shankar},
+           familyi={S\bibinitperiod},
+           given={Vaishaal},
+           giveni={V\bibinitperiod}}}%
+        {{hash=9769c01477fd6a34e0f7732729ee8eb4}{%
+           family={Carreira},
+           familyi={C\bibinitperiod},
+           given={Joao},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fef81d1ef8c8e861cd797371163d4120}{%
+           family={Krauth},
+           familyi={K\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3befe2e817ee8fef1387c0da9593349f}{%
+           family={Yadwadkar},
+           familyi={Y\bibinitperiod},
+           given={Neeraja},
+           giveni={N\bibinitperiod}}}%
+        {{hash=fa1b97983892cfef89de6a1b63f97bcc}{%
+           family={Gonzalez},
+           familyi={G\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=df77934f3c643c22d374a1c93593e737}{%
+           family={Popa},
+           familyi={P\bibinitperiod},
+           given={Raluca},
+           giveni={R\bibinitperiod}}}%
+        {{hash=51d9ef26181e2e8a9dc546b401e0bb26}{%
+           family={Stoica},
+           familyi={S\bibinitperiod},
+           given={Ion},
+           giveni={I\bibinitperiod}}}%
+        {{hash=64f58317379ddd1a24e0e6cba85ae78c}{%
+           family={Patterson},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{65ab23a5e132774bcc3f34c58643d1c1}
+      \strng{fullhash}{9af893ce9d91c4ad47880d51f1f24e97}
+      \strng{bibnamehash}{65ab23a5e132774bcc3f34c58643d1c1}
+      \strng{authorbibnamehash}{65ab23a5e132774bcc3f34c58643d1c1}
+      \strng{authornamehash}{65ab23a5e132774bcc3f34c58643d1c1}
+      \strng{authorfullhash}{9af893ce9d91c4ad47880d51f1f24e97}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ArXiv}
+      \field{month}{02}
+      \field{title}{Cloud Programming Simplified: A Berkeley View on Serverless Computing}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{kinesalite}{online}{}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labeltitlesource}{title}
+      \field{title}{Kinesalite}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/mhart/dynalite
+      \endverb
+      \verb{url}
+      \verb https://github.com/mhart/dynalite
+      \endverb
+    \endentry
+    \entry{ServerlessMultiCloud}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9a3404bd43bc4ce24102fed456ebfc4f}{%
+           family={Kritikos},
+           familyi={K\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=26a2a03eb9422ee4f2d9087df53edd00}{%
+           family={Skrzypek},
+           familyi={S\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \strng{fullhash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \strng{bibnamehash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \strng{authorbibnamehash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \strng{authornamehash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \strng{authorfullhash}{3a8ceb4645df5bd07bf48802b2a699f7}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Lecture Notes in Business Information Processing}
+      \field{title}{Towards an Optimized, Cloud-Agnostic Deployment of Hybrid Applications}
+      \field{year}{2019}
+    \endentry
+    \entry{@ServerlessCamel}{article}{}
+      \name{author}{4}{}{%
+        {{hash=9a3404bd43bc4ce24102fed456ebfc4f}{%
+           family={Kritikos},
+           familyi={K\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=26a2a03eb9422ee4f2d9087df53edd00}{%
+           family={Skrzypek},
+           familyi={S\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=dd708edc6bf42464f3da008f90d797ec}{%
+           family={Moga},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=05aeb96aeb00710d5d9c355e63ccdce0}{%
+           family={Matei},
+           familyi={M\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{4ef0b8d3a5b6b5e18ac9be78898ce272}
+      \strng{fullhash}{64b85cff4bf2848e501a5892e8cbd21e}
+      \strng{bibnamehash}{4ef0b8d3a5b6b5e18ac9be78898ce272}
+      \strng{authorbibnamehash}{4ef0b8d3a5b6b5e18ac9be78898ce272}
+      \strng{authornamehash}{4ef0b8d3a5b6b5e18ac9be78898ce272}
+      \strng{authorfullhash}{64b85cff4bf2848e501a5892e8cbd21e}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2019 IEEE 12th International Conference on Cloud Computing (CLOUD)}
+      \field{title}{Towards the Modelling of Hybrid Cloud Applications}
+      \field{year}{2019}
+    \endentry
+    \entry{MixedMethod}{article}{}
+      \name{author}{4}{}{%
+        {{hash=e172c0c71241609eecf24b0afd70e341}{%
+           family={Leitner},
+           familyi={L\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d0e8b14a4e4b668d18827aa2c0fcee6f}{%
+           family={Wittern},
+           familyi={W\bibinitperiod},
+           given={Erik},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ead52c8bfc835b4b8ab2d9e4d1a4eba4}{%
+           family={Spillner},
+           familyi={S\bibinitperiod},
+           given={Josef},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eb184730926d8a16859d0fe670faa3ad}{%
+           family={Hummer},
+           familyi={H\bibinitperiod},
+           given={Waldemar},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{a3ee761dc9d894f59f9892c53ec48c0b}
+      \strng{fullhash}{15c4c52b3277b1d2b11c4569d6fc7e1f}
+      \strng{bibnamehash}{a3ee761dc9d894f59f9892c53ec48c0b}
+      \strng{authorbibnamehash}{a3ee761dc9d894f59f9892c53ec48c0b}
+      \strng{authornamehash}{a3ee761dc9d894f59f9892c53ec48c0b}
+      \strng{authorfullhash}{15c4c52b3277b1d2b11c4569d6fc7e1f}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Systems and Software}
+      \field{title}{A mixed-method empirical study of Function-as-a-Service software development in industrial practice}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{LocalStack}{online}{}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labeltitlesource}{title}
+      \field{title}{LocalStack}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.localstack.cloud
+      \endverb
+      \verb{url}
+      \verb https://www.localstack.cloud
+      \endverb
+    \endentry
+    \entry{marinescu}{book}{}
+      \name{author}{1}{}{%
+        {{hash=3c8a712ff651fc48e421ec77392341f3}{%
+           family={Marinescu},
+           familyi={M\bibinitperiod},
+           given={D.C.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier Science}%
+      }
+      \strng{namehash}{3c8a712ff651fc48e421ec77392341f3}
+      \strng{fullhash}{3c8a712ff651fc48e421ec77392341f3}
+      \strng{bibnamehash}{3c8a712ff651fc48e421ec77392341f3}
+      \strng{authorbibnamehash}{3c8a712ff651fc48e421ec77392341f3}
+      \strng{authornamehash}{3c8a712ff651fc48e421ec77392341f3}
+      \strng{authorfullhash}{3c8a712ff651fc48e421ec77392341f3}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780128128114}
+      \field{title}{Cloud Computing: Theory and Practice}
+      \field{year}{2017}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://books.google.it/books?id=O9smDwAAQBAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.it/books?id=O9smDwAAQBAJ
+      \endverb
+    \endentry
+    \entry{MavenSite}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Maven}
+      \verb{urlraw}
+      \verb https://maven.apache.org/
+      \endverb
+      \verb{url}
+      \verb https://maven.apache.org/
+      \endverb
+    \endentry
+    \entry{MavenPom}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Maven - POM Reference}
+      \verb{urlraw}
+      \verb https://maven.apache.org/pom.html
+      \endverb
+      \verb{url}
+      \verb https://maven.apache.org/pom.html
+      \endverb
+    \endentry
+    \entry{MicrosoftSite}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Microsoft Azure}
+      \verb{urlraw}
+      \verb https://azure.microsoft.com/
+      \endverb
+      \verb{url}
+      \verb https://azure.microsoft.com/
+      \endverb
+    \endentry
+    \entry{moto}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Moto: Mock AWS Services}
+      \true{nocite}
+      \verb{urlraw}
+      \verb http://docs.getmoto.org/en/latest/
+      \endverb
+      \verb{url}
+      \verb http://docs.getmoto.org/en/latest/
+      \endverb
+    \endentry
+    \entry{mysql}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{MySQL}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.mysql.com/it/
+      \endverb
+      \verb{url}
+      \verb https://www.mysql.com/it/
+      \endverb
+    \endentry
+    \entry{mysqlnpm}{online}{}
+      \field{sortinit}{m}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{mysql - npm}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.npmjs.com/package/mysql
+      \endverb
+      \verb{url}
+      \verb https://www.npmjs.com/package/mysql
+      \endverb
+    \endentry
+    \entry{npm}{online}{}
+      \field{sortinit}{n}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labeltitlesource}{title}
+      \field{title}{npmjs}
+      \verb{urlraw}
+      \verb https://www.npmjs.com/
+      \endverb
+      \verb{url}
+      \verb https://www.npmjs.com/
+      \endverb
+    \endentry
+    \entry{OpenStack}{online}{}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labeltitlesource}{title}
+      \field{title}{OpenStack}
+      \verb{urlraw}
+      \verb https://www.openstack.org
+      \endverb
+      \verb{url}
+      \verb https://www.openstack.org
+      \endverb
+    \endentry
+    \entry{MultiCloud2}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5d37ccbaeec5c0f91a65676e60358035}{%
+           family={Petcu},
+           familyi={P\bibinitperiod},
+           given={Dana},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{5d37ccbaeec5c0f91a65676e60358035}
+      \strng{fullhash}{5d37ccbaeec5c0f91a65676e60358035}
+      \strng{bibnamehash}{5d37ccbaeec5c0f91a65676e60358035}
+      \strng{authorbibnamehash}{5d37ccbaeec5c0f91a65676e60358035}
+      \strng{authornamehash}{5d37ccbaeec5c0f91a65676e60358035}
+      \strng{authorfullhash}{5d37ccbaeec5c0f91a65676e60358035}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MultiCloud 2013 - Proceedings of the International Workshop on Multi-Cloud Applications and Federated Clouds}
+      \field{month}{04}
+      \field{title}{Multi-Cloud: expectations and current approaches}
+      \field{year}{2013}
+      \true{nocite}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+    \endentry
+    \entry{ScientificCloud}{article}{}
+      \name{author}{3}{}{%
+        {{hash=4625ecce77b90ddac2d16afc349e03b7}{%
+           family={{Peterson}},
+           familyi={P\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a91dbb153bb11efbbac9939f66fbfea3}{%
+           family={{Baumgartner}},
+           familyi={B\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=415d15406f27ab6319fe3dc2d7408598}{%
+           family={{Wang}},
+           familyi={W\bibinitperiod},
+           given={Q.},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2cd771b005d54438b34ef71146b5752}
+      \strng{fullhash}{c2cd771b005d54438b34ef71146b5752}
+      \strng{bibnamehash}{c2cd771b005d54438b34ef71146b5752}
+      \strng{authorbibnamehash}{c2cd771b005d54438b34ef71146b5752}
+      \strng{authornamehash}{c2cd771b005d54438b34ef71146b5752}
+      \strng{authorfullhash}{c2cd771b005d54438b34ef71146b5752}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2015 IEEE 8th International Conference on Cloud Computing}
+      \field{journaltitle}{2015 IEEE 8th International Conference on Cloud Computing}
+      \field{title}{A Hybrid Cloud Framework for Scientific Computing}
+      \field{year}{2015}
+      \true{nocite}
+      \field{pages}{373\bibrangedash 380}
+      \range{pages}{8}
+    \endentry
+    \entry{pymysql}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{PyMySQL}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://pymysql.readthedocs.io/en/latest/
+      \endverb
+      \verb{url}
+      \verb https://pymysql.readthedocs.io/en/latest/
+      \endverb
+    \endentry
+    \entry{PythonSite}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python}
+      \verb{urlraw}
+      \verb https://www.python.org/
+      \endverb
+      \verb{url}
+      \verb https://www.python.org/
+      \endverb
+    \endentry
+    \entry{qs}{online}{}
+      \field{sortinit}{q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{labeltitlesource}{title}
+      \field{title}{qs - npm}
+      \verb{urlraw}
+      \verb https://www.npmjs.com/package/qs
+      \endverb
+      \verb{url}
+      \verb https://www.npmjs.com/package/qs
+      \endverb
+    \endentry
+    \entry{regex}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Regular-Expression}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.regular-expressions.info/
+      \endverb
+      \verb{url}
+      \verb https://www.regular-expressions.info/
+      \endverb
+    \endentry
+    \entry{AwsJavaSDK}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{title}{SDK AWS per Java - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/sdk-for-java/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/sdk-for-java/
+      \endverb
+    \endentry
+    \entry{AwsJsSDK}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{title}{SDK AWS per JavaScript - Amazon Web Services}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/it/sdk-for-node-js/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/it/sdk-for-node-js/
+      \endverb
+    \endentry
+    \entry{ServerlessSite}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{title}{Serverless Framework}
+      \verb{urlraw}
+      \verb https://www.serverless.com
+      \endverb
+      \verb{url}
+      \verb https://www.serverless.com
+      \endverb
+    \endentry
+    \entry{ServerlessBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7f1762ca37e3bdfe657cbeb307704f04}{%
+           family={Stigler},
+           familyi={S\bibinitperiod},
+           given={Maddie},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Apress}%
+      }
+      \strng{namehash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \strng{fullhash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \strng{bibnamehash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \strng{authorbibnamehash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \strng{authornamehash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \strng{authorfullhash}{7f1762ca37e3bdfe657cbeb307704f04}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{01}
+      \field{title}{Beginning Serverless Computing: Developing with Amazon Web Services, Microsoft Azure, and Google Cloud}
+      \field{year}{2018}
+      \true{nocite}
+    \endentry
+    \entry{ForbesMultiCloud}{online}{}
+      \name{author}{1}{}{%
+        {{hash=47f4ab0dbd57c0a713da6083d5786d1c}{%
+           family={Synytsky},
+           familyi={S\bibinitperiod},
+           given={Ruslan},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \strng{fullhash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \strng{bibnamehash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \strng{authorbibnamehash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \strng{authornamehash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \strng{authorfullhash}{47f4ab0dbd57c0a713da6083d5786d1c}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{How to overcome the challanges of Gaining multi-cloud interoperability}
+      \verb{urlraw}
+      \verb https://www.forbes.com/sites/forbestechcouncil/2018/10/25/how-to-overcome-the-challenges-of-gaining-multi-cloud-interoperability
+      \endverb
+      \verb{url}
+      \verb https://www.forbes.com/sites/forbestechcouncil/2018/10/25/how-to-overcome-the-challenges-of-gaining-multi-cloud-interoperability
+      \endverb
+    \endentry
+    \entry{tablesaw}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Tablesaw | Java dataframe and visualization library}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://jtablesaw.github.io/tablesaw/
+      \endverb
+      \verb{url}
+      \verb https://jtablesaw.github.io/tablesaw/
+      \endverb
+    \endentry
+    \entry{pip}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{The Python Package Installer}
+      \verb{urlraw}
+      \verb https://pip.pypa.io/en/stable/
+      \endverb
+      \verb{url}
+      \verb https://pip.pypa.io/en/stable/
+      \endverb
+    \endentry
+    \entry{TOSCASite}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{TOSCA}
+      \verb{urlraw}
+      \verb https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca
+      \endverb
+      \verb{url}
+      \verb https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca
+      \endverb
+    \endentry
+    \entry{dockerNetwork}{online}{}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labeltitlesource}{title}
+      \field{title}{Use bridge network - Docker}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.docker.com/network/bridge/
+      \endverb
+      \verb{url}
+      \verb https://docs.docker.com/network/bridge/
+      \endverb
+    \endentry
+    \entry{util}{online}{}
+      \field{sortinit}{u}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labeltitlesource}{title}
+      \field{title}{util - npm}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.npmjs.com/package/util
+      \endverb
+      \verb{url}
+      \verb https://www.npmjs.com/package/util
+      \endverb
+    \endentry
+    \entry{DistributedFaas}{article}{}
+      \name{author}{5}{}{%
+        {{hash=e6b854aa139918d46b0fc03f281e3944}{%
+           family={Vasconcelos},
+           familyi={V\bibinitperiod},
+           given={Adbys},
+           giveni={A\bibinitperiod}}}%
+        {{hash=13b2e5e122c7e269a9644d056ba37437}{%
+           family={Vieira},
+           familyi={V\bibinitperiod},
+           given={Lucas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=fa51c315b81444e123a8bff31448d3a1}{%
+           family={Batista},
+           familyi={B\bibinitperiod},
+           given={Ítalo},
+           giveni={Í\bibinitperiod}}}%
+        {{hash=d47e2e385426158b690fece47c935e05}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Rodolfo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3a051c16605ea61bd8b7fd43de7ec4f3}{%
+           family={Brasileiro},
+           familyi={B\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{b2ee4a4515c27fb2067ccf8679f3a291}
+      \strng{fullhash}{5c7889db3e4c2d106b3b2740b29033d4}
+      \strng{bibnamehash}{b2ee4a4515c27fb2067ccf8679f3a291}
+      \strng{authorbibnamehash}{b2ee4a4515c27fb2067ccf8679f3a291}
+      \strng{authornamehash}{b2ee4a4515c27fb2067ccf8679f3a291}
+      \strng{authorfullhash}{5c7889db3e4c2d106b3b2740b29033d4}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{DistributedFaaS: Execution of Containerized Serverless Applications in Multi-Cloud Infrastructures}
+      \field{year}{2019}
+    \endentry
+    \entry{visualStudio}{online}{}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labeltitlesource}{title}
+      \field{title}{Visual Studio - Ambiente di sviluppo integrato}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://visualstudio.microsoft.com/
+      \endverb
+      \verb{url}
+      \verb https://visualstudio.microsoft.com/
+      \endverb
+    \endentry
+    \entry{TOSCAServerless}{article}{}
+      \name{author}{5}{}{%
+        {{hash=5ea1385c4b6e785a8ac8aa31a92c30f9}{%
+           family={Wurster},
+           familyi={W\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b9c70c83633550d9b2cb33fe9fd382b1}{%
+           family={Breitenbücher},
+           familyi={B\bibinitperiod},
+           given={U.},
+           giveni={U\bibinitperiod}}}%
+        {{hash=ecee6efedd3af3d5fbaf8740609634d6}{%
+           family={Képes},
+           familyi={K\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3ccb9a175581c67a6631f1e6cf120546}{%
+           family={Leymann},
+           familyi={L\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=de9d4619b6012512a5bc4b6d374da936}{%
+           family={Yussupov},
+           familyi={Y\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{3c30f12a7ab013cfef10791254b03294}
+      \strng{fullhash}{5033910d5f68c98976436584f14d4dd2}
+      \strng{bibnamehash}{3c30f12a7ab013cfef10791254b03294}
+      \strng{authorbibnamehash}{3c30f12a7ab013cfef10791254b03294}
+      \strng{authornamehash}{3c30f12a7ab013cfef10791254b03294}
+      \strng{authorfullhash}{5033910d5f68c98976436584f14d4dd2}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2018 IEEE 11th Conference on Service-Oriented Computing and Applications (SOCA)}
+      \field{title}{Modeling and Automated Deployment of Serverless Applications Using TOSCA}
+      \field{year}{2018}
+    \endentry
+    \entry{Xtext}{online}{}
+      \field{sortinit}{X}
+      \field{sortinithash}{1965c258adceecf23ce3d67b05113442}
+      \field{labeltitlesource}{title}
+      \field{title}{Xtext}
+      \verb{urlraw}
+      \verb https://www.eclipse.org/Xtext/
+      \endverb
+      \verb{url}
+      \verb https://www.eclipse.org/Xtext/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

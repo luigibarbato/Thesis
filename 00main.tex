@@ -18,7 +18,8 @@
 \usepackage{color}
 \usepackage[block=ragged,backend=biber,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 \addbibresource{bibliography.bib} % The filename of the bibliography
-\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage[autostyle=true]{csquotes}
+\usepackage{xcolor} % Required to generate language-dependent quotes in the bibliography
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -96,7 +97,7 @@ showstringspaces=false}
 {\large Tesi di Laurea di I livello in }\\[0.2truecm]
 {\Large Informatica}\\
 \vfill\vfill
-{\Huge Kubernetes in Fly}
+{\Huge Implementazione di un ambiente di esecuzione basato su Kubernetes nel linguaggio FLY}
 \vfill\vfill
 
 
@@ -116,7 +117,7 @@ Anno Accademico 2020-2021
 
 \pagenumbering{roman}
 \chapter*{Abstract}
-\input{0abstract.tex}
+\input{Capitoli/Abstract/abstract.tex}
 
 \vfill
 \centerline{\Large\sf Questa tesi è stata sviluppata in  \raisebox{-0.05truecm}{\epsfig{file=Figure/logo_small.jpg,width=2truecm}}}
@@ -128,32 +129,29 @@ Anno Accademico 2020-2021
 \chapter{Introduzione}
 \setcounter{page}{1} 	% devono seguire solo il primo capitolo
 \pagenumbering{arabic}	% devono seguire solo il primo capitolo
-\input{Capitoli/Introduzione/0introduzione.tex}
 \input{Capitoli/Introduzione/1cloud-computing.tex}
 \input{Capitoli/Introduzione/2multi-cloud.tex}
 \input{Capitoli/Introduzione/3containerizzazione.tex}
-\input{Capitoli/Introduzione/4kubernetes.tex}
+\input{Capitoli/Introduzione/4docker.tex}
+\input{Capitoli/Introduzione/5kubernetes.tex}
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{Stato dell'Arte}
-% \input{2statoarte.tex}
+\chapter{Stato dell'Arte}
+\input{Capitoli/StatoArte/1statoarte.tex}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{Fly Language}
-% \input{3fly.tex}
+\chapter{Fly Language}
+\input{Capitoli/Fly/fly.tex}
+
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{Ambiente di debug} \label{debug}
-% \input{4debug.tex}
+\chapter{Ambiente di esecuzione Kubernetes} \label{Kubernetes}
+\input{Capitoli/Implementaziome/k8s_fly.tex}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{Supporto alle sorgenti dati esterne}
-% \input{5database.tex}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{Conclusioni}
-% \input{6conclusioni.tex}
+\chapter{Conclusioni}
+\input{Capitoli/Conclusioni/conclusioni.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \nocite{*}

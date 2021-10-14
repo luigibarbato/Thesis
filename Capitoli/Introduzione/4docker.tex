@@ -1,0 +1,20 @@
+\section{Docker}
+Docker è una tecnologia open–source per la costruzione, spostamento, distribuzione e rilascio di
+applicazioni basate su container, distribuita sotto Licenza Apache Common 2.0, disponibile per
+tutte le maggiori piattaforme in grado di eseguire container in ambienti Linux oppure Windows.
+La struttura stessa dei container garantisce il loro isolamento, permettendo l’esecuzione multipla
+su un singolo host, sfruttando direttamente il kernel della macchina senza la necessità di un server
+hypervisor. In questo modo, i container sono il centro dello sviluppo dell’applicazione, la quale
+viene costruita come insieme di container per esprimere le dipendenze, permettendone una facile
+distribuzione e testing in ambienti diversi, fino alla messa in campo in produzione in un data
+center locale, presso un cloud provider o una soluzione ibrida tra le precedenti.
+Docker utilizza e crea differenti tipi di oggetti, come immagini e container. Un container costituisce 
+un’istanza di un’immagine in esecuzione, con il quale è possibile interagire direttamente dalla
+macchina host, e può essere visto come un’evoluzione di un processo, isolato dagli altri container
+e dal sistema host.
+Un’immagine, invece, costituisce un template di sola lettura, utilizzato per la creazione di un
+container Docker. Solitamente, un’immagine viene costruita sulla base di un’altra immagine alla
+quale vengono aggiunte le configurazioni necessarie e peculiari dell’applicazione. La definizione
+di un’immagine avviene all’interno di un file, chiamato Dockerfile, nel quale vengono indicate
+le istruzioni, ognuna delle quali aggiunge un layer all’interno dell’immagine finale, in modo tale
+che, di volta in volta, vengano ricompilati solo gli strati che effettivamente sono stati modificati.

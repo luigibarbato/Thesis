@@ -1,0 +1,253 @@
+\section{Kubernetes in Fly}
+Fly permette all'utente di sviluppare ed eseguire i propri applicativi senza preoccuparsi della gestione delle risorse, dell'ambiente su cui viene eseguito e tutto ciò che riguarda il ciclo di vita dell'applicativo stesso.
+Ciò è possibile grazie al paradigma FaaS (Function as a Service), il quale permette di sfruttare i servizi offerti dai vari cloud provider per eseguire applicativi in ambienti serverless. Sebbene ciò abbia portato innumerevoli vantaggi nell'esecuzione e nella gestione del costrutto Fly, si riscontrano comunque delle problematiche e delle limitazioni:
+\begin{itemize}
+    \item gli ambienti serverless offerti dai diversi cloud provider limitano il tempo di esecuzione degli applicativi;
+    \item le risorse disponibili per l'esecuzione del codice sono predefinite;
+    \item l'ambiente in cui viene eseguito l'applicativo Fly è gestito dal Cloud Provider stesso. Un livello di astrazione così alto comporta l'impossibilità di gestire possibili errori e avere il pieno controllo dell'ambiente di esecuzione.
+\end{itemize}
+
+L'introduzione di un ambiente di esecuzione basato su Kubernetes all'interno di Fly permette di risolvere alcune di queste problematiche permettendo l'esecuzione delle funzioni Fly all'interno di un cluster Kubernetes. Ciò permette di avere un flusso di esecuzione simile a quello eseguito su ambiente serverless garantendo però un maggior controllo e meno limitazioni. La tecnologia sfruttata dai servizi di serverless computing, infatti, è basata sul lancio di container, ognuno dei quali si occupa dell'esecuzione di una singola funzione.
+\section{Integrazione in Fly}
+L'integrazione all'interno del linguaggio Fly, è stata progettata in modo da seguire le medesime sintassi e semantiche utilizzate per gli altri ambienti di esecuzione. Nello specifico, è stata introdotta l'entità \verb|K8s| la quale richiede tre campi necessari come si può leggere a Linea 4 del Listato 4.1
+\begin{itemize}
+    \item\textbf{type} indica il tipo di ambiente di esecuzione che stiamo utilizzando. Nel nostro caso equivale a \verb|K8s|;
+    \item\textbf{clusterName} indica il nome del cluster di riferimento per l'esecuzione dell'applicativo Fly;
+    \item\textbf{registryName} è un campo particolare in cui l'utente definisce il nome del registro nel quale verranno caricate le immagini docker necessarie all'esecuzione dell'applicativo Fly. 
+\end{itemize}
+
+% TODO: Modificare %
+Per mantenere coerenza con Fly, 
+si è preferito conservare la possibilità di scegliere come eseguire il proprio applicativo, 
+ovvero se in locale o su cloud. L'utente può infatti decidere fra computare la propria applicazione su un cluster in locale, 
+oppure su un cloud provider, come ad esempio AWS o Azure.
+\begin{itemize}
+    \item\textbf{type} indica il tipo di ambiente di esecuzione che stiamo utilizzando. Nel nostro caso equivale a \verb|smp| per un esecuzione in locale oppure \verb|aws| per un esecuzione su AWS oppure \verb|Azure| per un esecuzione su Azure;
+    \item\textbf{threads} indica il numero di repliche dell'applicativo da eseguire in parello sul cluster.
+    \item\textbf{language} indica il linguaggio nel quale l'applicativo Fly deve essere tradotto ed eseguito.
+\end{itemize}
+
+Il Listato 4.1 mostra un esempio del programma per il calcolo di pi greco su un ambiente \verb|k8s|
+\begin{lstlisting}[language=FLY,caption={Stima di PI Greco usando il metodo Monte Carlo su ambiente k8s su Azure}, label={lst:k8s}]
+    # Computazione del pi greco
+    var cloud = [type="azure", language="nodejs", threads=100]
+    
+    var cluster = [type="k8s",clusterName="Fly",registryName="FlyRegistry.azurecr.io"] on cloud 
+                          
+    var ch = [type="channel"] on cloud
+    
+    func pi(){       
+       var r = [type="random"]   
+       var x = r.nextDouble()          
+       var y = r.nextDouble()                  
+       var msg = 0  
+       if((x * x)+(y * y) < 1.0){msg = 1}             
+       ch!msg on cluster
+    }  
+    func estimation(){
+    var sum = 0
+    var crt = 0
+    for i in [0:100] {
+          sum += ch? as Integer
+      crt += 1
+    }
+    println "pi estimation: " + (sum*4.0) / crt
+    }
+    
+    fly pi in [0:100] on cluster thenall estimation    
+\end{lstlisting}
+
+
+\section{Implementazione}
+L'implementazione dell'ambiente di esecuzione Kubernetes è stata realizzata in modo tale che tutti i processi interni che consentono il corretto funzionamento della computazione, 
+venissero realizzati sfruttando gran parte dei tools e degli oggetti forniti da Kubernetes stesso, elencati e descritti di seguito:
+
+\begin{itemize}
+  \item\textbf{Pod} Un Pod costituisce la più semplice, piccola e basilare unità di esecuzione in Kubernetes. Essa verrà utilizzata per incapsulare ed eseguire il container della risorsa necessaria al corretto funzionamento
+  dell'applicativo Fly.
+  \item\textbf{ReplicaSet} Un ReplicaSet ha il compito specifico di mantenere attive una o più copie di un Pod. Esso verrà utilizzato per avere più copie dello stesso applicativo Fly in modo da poter innescare meccanismi di calcolo parallelo.
+  \item\textbf{Job} Un oggetto di tipo Job permette di eseguire e gestire task complessi all'interno del cluster. Sfrutteremo questa sua peculiarità per poter soddisfare la richiesta di computazione parallela.
+  \item\textbf{NodePort} I Pod in Kubernetes sono entità effimere, essi vengono creati e distrutti in base allo stato desiderato del cluster, per natura quindi non hanno un'identificazione statica all'interno della rete del cluster ma ad ogni Pod viene assegnato un indirizzo IP dinamico che varia nel tempo.
+  Utilizzeremo un NodePort per poter interagire con essi.
+  \item\textbf{LoadBalancer} Un LoadBalancer permette di esporre i Pod all'esterno del cluster. Utilizzeremo un LoadBalancer nel caso in cui il cluster sia fornito da un Cloud Provider.
+  \item\textbf{Deployment} L'oggetto Deployment si occupa di creare e gestire il ciclo di vita degli Oggetti all'interno del cluster. Utilizzeremo questa componente per definire lo stato ed i comportamenti del cluster.
+  \item\textbf{Kubectl} Kubectl è un potente tool da linea di comando fornito da Kubernetes che permette di eseguire comandi e chiamate al server API \verb|kube|. Lo utilizzeremo per comunicare con il cluster Kubernetes. 
+\end{itemize}
+
+% Per garantire inoltre un processo d'esecuzione pienamente funzionale e compatibile con Fly ed i Cloud Provider di riferimento, sono state utilizzate le seguenti tecnologie e dipendenze esterne:
+
+% \subsection{Tecnologie e dipendenze esterne}
+% \begin{itemize}
+%   \item\textbf{Docker} 
+%   \item\textbf{Redis}
+%   \item\textbf{Minikube} indica il tipo di ambiente di esecuzione che stiamo utilizzando. Nel nostro caso equivale a \verb|K8s|;
+%   \item\textbf{AWS EKS} è un campo particolare in cui l'utente definisce il nome del registro nel quale verranno caricate le immagini docker necessarie all'esecuzione dell'applicativo Fly. 
+%   \item\textbf{Azure AKS}
+% \end{itemize}
+
+\section{Generazione codice}
+Una volta dichiarata l'entità K8s, l'utente dunque può decidere sia il linguaggio da utilizzare, che se eseguire l'applicativo in un cluster locale o un cluster in cloud ed anche quanti processi dello stesso applicativo eseguire in maniera parallela. Verranno quindi generati diversi file YAML, che conterranno le informazioni necessarie ad una corretta configurazione dello stato desiderato del cluster ed a seconda del linguaggio scelto, 
+verranno richiamati due differenti generatori: un generatore per il codice JavaScript ed un generatore per il codice Python.
+
+\subsubsection{JavaScript}
+Il metodo principale, responsabile non solo della generazione del codice Javascript ma anche di tutto il processo di esecuzione è: \verb|k8sDeploy()|. 
+Nello specifico, genererà le seguenti componenti:
+
+\begin{itemize}
+  \item\textbf{redis.yml} il file di deployment per l'immagine ed il servizio Redis;
+  \item\textbf{Dockerfile} il file Docker per generare l'immagine dell'ambiente Fly;
+  \item\textbf{node.yml} il file di deployment contenente tutte le informazioni necessarie all'esecuzione dell'ambiente all'interno del cluster;
+\end{itemize}
+
+Ed infine verrà generato il file \verb|main.js| che conterrà il codice Fly scritto dall'utente e tradotto in linguaggio JavaScript con una configurazione automatizzata in modo da poter interagire con la coda Redis.
+
+\begin{lstlisting}
+    let redis = require('redis'), client = redis.createClient({port:6379,host:'redis'});
+var x = Math.random()
+var y = Math.random()
+var msg = 0
+if((x * x) + (y * y) < 1.0)
+    {
+        msg = 1 
+    }
+client.on('ready', function (err) {
+client.rpush('queue:jobs',msg)});
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=FLY,caption={File di configurazione per il servizio Redis}, label={lst:k8s}]
+  apiVersion: v1
+kind: Service
+metadata:
+name: redis
+spec:
+ports:
+  - port: 6379
+    targetPort: 6379
+selector:
+  app: redis
+  ---
+  apiVersion: v1
+kind: Service
+metadata:
+name: public-svc
+spec:
+type: LoadBalancer
+ports:
+- port: 6379
+selector:
+  app: redis
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dockerfile}, label={lst:k8s}]
+    FROM node:10
+    EXPOSE 8888
+    WORKDIR /function
+    COPY ./main.js .
+    RUN npm install redis
+    CMD ["node", "main.js"]
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={File di Deployment}, label={lst:k8s}]
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: fly-job
+    spec:
+      parallelism: ${parallelism}
+      completions: ${completions}
+      ttlSecondsAfterFinished: 5
+      template:
+        metadata:
+          name: fly
+          labels:
+            jobgroup: fly
+        spec:
+          containers:
+            - name: fly-node
+              image: ${registryName}/fly_node
+              command: [ "node", "./main.js" ]
+          restartPolicy: Never
+\end{lstlisting}
+
+\subsubsection{Python}
+Analogamente al generatore JavaScript, il generatore Python attraverso il metodo \verb|k8sDeploy()| genererà tutte le risorse necessarie all'esecuzione dell'applicativo Fly:
+
+\begin{itemize}
+  \item\textbf{redis.yml} il file di deployment per l'immagine ed il servizio Redis;
+  \item\textbf{Dockerfile} il file Docker per generare l'immagine dell'ambiente Fly;
+  \item\textbf{python.yml} il file di deployment contenente tutte le informazioni necessarie all'esecuzione dell'ambiente all'interno del cluster;
+\end{itemize}
+
+Ed infine verrà generato il file \verb|main.py| che conterrà il codice Fly scritto dall'utente e tradotto in linguaggio Python con una configurazione automatizzata in modo da poter interagire con la coda Redis.
+
+\begin{lstlisting}[language=FLY,caption={Python generato da un file di esempio della stima di PI Greco usando il metodo Monte Carlo}, label={lst:k8s}]
+    let redis = require('redis'), client = redis.createClient({port:6379,host:'redis'});
+var x = Math.random()
+var y = Math.random()
+var msg = 0
+if((x * x) + (y * y) < 1.0)
+    {
+        msg = 1 
+    }
+client.on('ready', function (err) {
+client.rpush('queue:jobs',msg)});
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=FLY,caption={File di configurazione per il servizio Redis}, label={lst:k8s}]
+  apiVersion: v1
+kind: Service
+metadata:
+name: redis
+spec:
+ports:
+  - port: 6379
+    targetPort: 6379
+selector:
+  app: redis
+  ---
+  apiVersion: v1
+kind: Service
+metadata:
+name: public-svc
+spec:
+type: LoadBalancer
+ports:
+- port: 6379
+selector:
+  app: redis
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={Dockerfile}, label={lst:k8s}]
+    FROM node:10
+    EXPOSE 8888
+    WORKDIR /function
+    COPY ./main.py .
+    RUN npm install redis
+    CMD ["python3", "main.py"]
+\end{lstlisting}
+
+\begin{lstlisting}[language=FLY,caption={File di Deployment}, label={lst:k8s}]
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: fly-job
+    spec:
+      parallelism: ${parallelism}
+      completions: ${completions}
+      ttlSecondsAfterFinished: 5
+      template:
+        metadata:
+          name: fly
+          labels:
+            jobgroup: fly
+        spec:
+          containers:
+            - name: fly-python
+              image: ${registryName}/fly_python
+              command: [ "python", "./main.py" ]
+          restartPolicy: Never
+\end{lstlisting}

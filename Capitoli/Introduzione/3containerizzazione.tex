@@ -1,21 +1,16 @@
 %!TEX root = ../../00main.tex
 
 \section{Containerizzazione}
-Le prime applicazioni realizzate in informatica venivano eseguite ognuna su una macchina fisica dedicata, con conseguenti costi durante le fasi di acquisto, configurazione e manutenzione e con il rischio di non sfruttare mai completamente le risorse allocate.
-La \textit{virtualizzazione hardware} ha risolto tale problema, permettendo di allocare e condensare i servizi su poche macchine server fisiche, portando ad una riduzione dei costi e migliorando sopratutto la manutenibilità di tali architetture. un software particolare, noto come hypervisor è responsabile del collegamento con l'hardware e permette di condividere un singolo sistema host fisico tra diversi ambienti, separati e ben distingi  
+La virtualizzazione è una tecnologia che permette di mettere a disposizione risorse hardware come CPU e memoria sottoforma di risorse virtuali. Attraverso la virtualizzazione è possibile utilizzare delle risorse virtuali allo stesso modo di come si farebbe con delle risorse fisiche permettendo di migliorare la scalabilità e i carichi di lavoro, usando al contempo un minor numero di macchine, una quantità di energia elettrica ridotta, generando così un risparmio sui costi di infrastruttura e gestione.
+Uno dei principali vantaggi della virtualizzazione è la razionalizzazione e l'ottimizzazione delle risorse hardware in quanto più macchine virtuali possono girare contemporaneamente su un sistema fisico condividendo le risorse della piattaforma.
+La metodologia più semplice di virtualizzazione prevede la creazione di una macchina virtuale che va a simulare un'intero sistema fisico con risorse come CPU, memoria e componenti di reti. Una macchina virtuale dovrà quindi essere utilizzata come un normale computer desktop, eseguendo un proprio sistema operativo e rimanendo completamente isolata dall'hardware fisico sottostante.
 Con il termine containerizzazione si intende una para-virtualizzazione dell'ambiente applicativo che consente di eseguire software, librerie, dipendenze e tutte le componenti necessarie, in un processo isolato che prende il nome di contenitore. Esso può essere considerato un vero e proprio eseguibile che non dipende da alcuna sorgente esterna. Questo lo rende estremamente portatile e affidabile in quanto può essere eseguito e trasferito in ogni tipo di ambiente e d'infrastruttura.
 L'idea alla base del paradigma non è in realtà nuova in quanto sfrutta una funzionalità del kernel Linux presente già dalla versione 2.6.24 che permette l'isolamento e la gestione delle risorse di uno o più processi.
 
 \subsection{Vantaggi}
-L'utilizzo di questa tecnologia ha rivoluzionato il modus operandi del settore IT, dello sviluppo software e della loro distribuzione su infrastrutture Cloud. Questo grazie a tre principali vantaggi:
+Il grande successo della virtualizzazione basata su container deriva dai grandi vantaggi che essa garantisce. Tra essi troviamo:
 \begin{itemize}
-\item \textbf{Portabilità} - Poichè un container contiene tutte le componenti necessarie all'esecuzione dell'applicazione ed è un processo isolato del sistema ospitante, 
-\item \textbf{Efficienza} - I contenitori hanno la capacità di condividere il kernel della macchina ospitante evitando così di dover disporre di risorse hardware e software dedicate.
+\item \textbf{Portabilità} - I container sono altamente portabili in quanto contengono al loro interno tutte le dipendenze e le componenti necessarie all'esecuzione dell'applicazione, evitando così problemi di compatibilità
+\item \textbf{Efficienza} - I container hanno la capacità di condividere il kernel della macchina ospitante evitando così di dover disporre di risorse hardware e software dedicate. Inoltre è sempre possibile aumentare e diminuire le risorse in modo istantaneo, in base alle proprie esigenze, in modo da non incorrere in sprechi o in carenze.
 \item \textbf{Ottimizzazione dello spazio} - L'immagine dell'applicazione che viene eseguita all'interno del contenitore, incapsula solo ed unicamente le componenti e le informazioni necessarie alla sua esecuzione.
-\item \textbf{Ambienti di sviluppo innovativi} - Una nuova strategia di sviluppo che si sta affermando negli ultimi anni è quella del DevOps e la containerizzazione è un punto cardine di questo nuovo paradigma. Per la natura stessa dei contenitori, gli sviluppatori possono condividere facilmente il loro software, eliminando così problemi di compatibilità dettati da ambienti di sviluppo e di esecuzione differenti. 
 \end{itemize}
-
-\subsection{Macchina Virtuale e Containerizzazione}
-Una macchina virtuale è una rappresentazione virtuale delle risorse hardware e software di un sistema informatico. Essa ha il compito dunque di ricreare CPU, memoria, interfaccia di rete e storage e di eseguire un intero sistema operativo.
-Un contenitore si basa sul kernel del sistema operativo host e contiene solo le componenti necessarie all'esecuzione dell'applicativo containerizzato.
-La somiglianza tra containerizzazione e virtualizzazione sta nel fatto che entrambe consentono l'isolamento completo delle applicazioni, che le rende operative su più ambienti. La differenza sta invece nelle dimensioni, nella portabilità e nell'efficienza.
