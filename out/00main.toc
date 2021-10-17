@@ -31,79 +31,79 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.4}Docker}{5}{section.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.5}Kubernetes}{5}{section.1.5}%
+\contentsline {section}{\numberline {1.5}Kubernetes}{6}{section.1.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5.1}Architettura}{6}{subsection.1.5.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5.2}Componenti del Control Plane}{7}{subsection.1.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.5.3}Componenti del Worker Node}{7}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.3}Componenti del Worker Node}{8}{subsection.1.5.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5.4}Oggetti Kubernetes}{8}{subsection.1.5.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Stato dell'Arte}{10}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Stato dell'Arte}{11}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Fly Language}{12}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Fly Language}{13}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Obiettivi}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.1}Obiettivi}{14}{section.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Xtext}{15}{section*.10}%
+\contentsline {subsubsection}{Xtext}{16}{section*.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Architettura}{15}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Architettura}{16}{section.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Definizione del linguaggio}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Definizione del linguaggio}{18}{section.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Object}{19}{section*.13}%
+\contentsline {subsubsection}{Object}{20}{section*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Ambiente di esecuzione}{19}{section*.14}%
+\contentsline {subsubsection}{Ambiente di esecuzione}{20}{section*.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Channel}{20}{section*.15}%
+\contentsline {subsubsection}{Channel}{21}{section*.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Funzione Fly}{20}{section*.16}%
+\contentsline {subsubsection}{Funzione Fly}{21}{section*.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Funzione di Callback}{21}{section*.17}%
+\contentsline {subsubsection}{Funzione di Callback}{22}{section*.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Esecuzioni asincrone}{21}{section*.18}%
+\contentsline {subsubsection}{Esecuzioni asincrone}{22}{section*.18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Codice nativo}{21}{section*.19}%
+\contentsline {subsubsection}{Codice nativo}{22}{section*.19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Struttura di un progetto Fly}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}Struttura di un progetto Fly}{23}{subsection.3.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Generazione del codice}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Generazione del codice}{23}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Amazon Web Services}{23}{section*.20}%
+\contentsline {subsubsection}{Amazon Web Services}{24}{section*.20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Microsoft Azure}{24}{section*.21}%
+\contentsline {subsubsection}{Microsoft Azure}{25}{section*.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.1}Ambiente di esecuzione}{25}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.1}Ambiente di esecuzione}{26}{subsection.3.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Ambiente locale - SMP}{25}{section*.22}%
+\contentsline {subsubsection}{Ambiente locale - SMP}{26}{section*.22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Ambiente su Cloud - Amazon Web Services}{25}{section*.23}%
+\contentsline {subsubsection}{Ambiente su Cloud - Amazon Web Services}{26}{section*.23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Ambiente su Cloud - Microsoft Azure}{26}{section*.24}%
+\contentsline {subsubsection}{Ambiente su Cloud - Microsoft Azure}{27}{section*.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.2}\textit {Channel}}{28}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.2}\textit {Channel}}{29}{subsection.3.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.3}Script di deploy e undeploy delle funzioni}{28}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.3}Script di deploy e undeploy delle funzioni}{29}{subsection.3.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.4}Sincronizzazione}{30}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.4}Sincronizzazione}{31}{subsection.3.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Ambiente di esecuzione Kubernetes}{31}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Ambiente di esecuzione Kubernetes}{32}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Kubernetes in Fly}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.1}Kubernetes in Fly}{32}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Integrazione in Fly}{32}{section.4.2}%
+\contentsline {section}{\numberline {4.2}Integrazione in Fly}{33}{section.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Implementazione}{33}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Implementazione}{34}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Generazione codice}{34}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Generazione codice}{35}{section.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{JavaScript}{34}{section*.25}%
+\contentsline {subsubsection}{JavaScript}{35}{section*.25}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Python}{36}{section*.26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusioni}{38}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Conclusioni}{37}{chapter.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.1}Obiettivi raggiunti}{38}{section.5.1}%
 \defcounter {refsection}{0}\relax 

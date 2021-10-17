@@ -1,8 +1,23 @@
-In questo lavoro di tesi viene descritta un'importante funzionalità introdotta all'interno del linguaggio Fly \cite{ISISLab}, ovvero la possibilità di utilizzare cluster Kubernetes per l'esecuzione di applicativi Fly.\\
+Il Cloud Computing ha avuto una rapida e veloce espansione negli ultimi anni grazie alla sua innovativa forma di erogazione delle risorse: fornire e richiedere risorse solo quando strettamente necessarie.
+Grazie a tale intuizione, i diversi Cloud Provider hanno iniziato a fornire servizi di tipo Serverless ossia servizi in cui le applicazioni vengono avviate solo quando necessario. Quando un evento attiva l'esecuzione del codice, Il Cloud Provider assegna dinamicamente le risorse all'applicazione fino al termine dell'esecuzione. 
+Fly è un linguaggio Domanin-Specific che si basa proprio su tale paradigma, l'utente così non deve preoccuparsi della gestione delle risorse, dell'ambiente su cui viene eseguito e tutto ciò che riguarda il ciclo di vita dell'applicativo stesso.
+Sebbene ciò abbia portato innumerevoli vantaggi nell'esecuzione e nella gestione del costrutto Fly, si sono riscontrate alcune problematiche e limitazioni:
+\begin{itemize}
+    \item gli ambienti serverless offerti dai diversi cloud provider limitano il tempo di esecuzione degli applicativi;
+    \item le risorse disponibili per l'esecuzione del codice sono predefinite;
+    \item l'ambiente in cui viene eseguito l'applicativo Fly è gestito dal Cloud Provider stesso. Un livello di astrazione così alto comporta l'impossibilità di gestire possibili errori e avere il pieno controllo dell'ambiente di esecuzione.
+\end{itemize}
+
+Questo lavoro di tesi ha voluto risolvere i problemi che limitavano le risorse e le libertà computazionali di Fly, introducendo un ambiente di esecuzione in Kubernetes, ponendosi i seguenti obiettivi:
+
+\begin{itemize}
+    \item \textbf{Tempi di esecuzione illimitati}
+    \item \textbf{Allocazione dinamica dele risorse} 
+    \item \textbf{Controllo dell'ambiente di esecuzione} 
+\end{itemize}
 
 \section{Obiettivi raggiunti}
-L'introduzione e l'integrazione di un ambiente Kubernetes all'interno di Fly ha permesso non solo di superare le limitazioni dettate dall'utilizzo di servizi Serverless ma ha permesso anche una maggiore libertà
-di gestione delle risorse applicative.
+L'obiettivo di introdurre la possibilità di eseguire un applicativo FLY su un cluster kubernetes è stato raggiunto. In particolare, i costrutti introdotti consentono di mantenere la semplicità di utilizzo e l'astrazione caratteristiche di FLY permettendo all'utente di eseguire le funzioni FLY sia su un cluster on-premise sia su Cloud.
 
 \section{Sviluppi futuri}
 Riguardo i possibili sviluppi futuri che possono interessare l'ambiente Kuberntes in Fly sono:

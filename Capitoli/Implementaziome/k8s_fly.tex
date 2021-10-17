@@ -74,17 +74,6 @@ venissero realizzati sfruttando gran parte dei tools e degli oggetti forniti da 
   \item\textbf{Kubectl} Kubectl è un potente tool da linea di comando fornito da Kubernetes che permette di eseguire comandi e chiamate al server API \verb|kube|. Lo utilizzeremo per comunicare con il cluster Kubernetes. 
 \end{itemize}
 
-% Per garantire inoltre un processo d'esecuzione pienamente funzionale e compatibile con Fly ed i Cloud Provider di riferimento, sono state utilizzate le seguenti tecnologie e dipendenze esterne:
-
-% \subsection{Tecnologie e dipendenze esterne}
-% \begin{itemize}
-%   \item\textbf{Docker} 
-%   \item\textbf{Redis}
-%   \item\textbf{Minikube} indica il tipo di ambiente di esecuzione che stiamo utilizzando. Nel nostro caso equivale a \verb|K8s|;
-%   \item\textbf{AWS EKS} è un campo particolare in cui l'utente definisce il nome del registro nel quale verranno caricate le immagini docker necessarie all'esecuzione dell'applicativo Fly. 
-%   \item\textbf{Azure AKS}
-% \end{itemize}
-
 \section{Generazione codice}
 Una volta dichiarata l'entità K8s, l'utente dunque può decidere sia il linguaggio da utilizzare, che se eseguire l'applicativo in un cluster locale o un cluster in cloud ed anche quanti processi dello stesso applicativo eseguire in maniera parallela. Verranno quindi generati diversi file YAML, che conterranno le informazioni necessarie ad una corretta configurazione dello stato desiderato del cluster ed a seconda del linguaggio scelto, 
 verranno richiamati due differenti generatori: un generatore per il codice JavaScript ed un generatore per il codice Python.
@@ -101,76 +90,6 @@ Nello specifico, genererà le seguenti componenti:
 
 Ed infine verrà generato il file \verb|main.js| che conterrà il codice Fly scritto dall'utente e tradotto in linguaggio JavaScript con una configurazione automatizzata in modo da poter interagire con la coda Redis.
 
-\begin{lstlisting}
-    let redis = require('redis'), client = redis.createClient({port:6379,host:'redis'});
-var x = Math.random()
-var y = Math.random()
-var msg = 0
-if((x * x) + (y * y) < 1.0)
-    {
-        msg = 1 
-    }
-client.on('ready', function (err) {
-client.rpush('queue:jobs',msg)});
-\end{lstlisting}
-
-
-\begin{lstlisting}[language=FLY,caption={File di configurazione per il servizio Redis}, label={lst:k8s}]
-  apiVersion: v1
-kind: Service
-metadata:
-name: redis
-spec:
-ports:
-  - port: 6379
-    targetPort: 6379
-selector:
-  app: redis
-  ---
-  apiVersion: v1
-kind: Service
-metadata:
-name: public-svc
-spec:
-type: LoadBalancer
-ports:
-- port: 6379
-selector:
-  app: redis
-
-\end{lstlisting}
-
-\begin{lstlisting}[language=FLY,caption={Dockerfile}, label={lst:k8s}]
-    FROM node:10
-    EXPOSE 8888
-    WORKDIR /function
-    COPY ./main.js .
-    RUN npm install redis
-    CMD ["node", "main.js"]
-\end{lstlisting}
-
-\begin{lstlisting}[language=FLY,caption={File di Deployment}, label={lst:k8s}]
-    apiVersion: batch/v1
-    kind: Job
-    metadata:
-      name: fly-job
-    spec:
-      parallelism: ${parallelism}
-      completions: ${completions}
-      ttlSecondsAfterFinished: 5
-      template:
-        metadata:
-          name: fly
-          labels:
-            jobgroup: fly
-        spec:
-          containers:
-            - name: fly-node
-              image: ${registryName}/fly_node
-              command: [ "node", "./main.js" ]
-          restartPolicy: Never
-\end{lstlisting}
-
 \subsubsection{Python}
 Analogamente al generatore JavaScript, il generatore Python attraverso il metodo \verb|k8sDeploy()| genererà tutte le risorse necessarie all'esecuzione dell'applicativo Fly:
 
@@ -181,73 +100,3 @@ Analogamente al generatore JavaScript, il generatore Python attraverso il metodo
 \end{itemize}
 
 Ed infine verrà generato il file \verb|main.py| che conterrà il codice Fly scritto dall'utente e tradotto in linguaggio Python con una configurazione automatizzata in modo da poter interagire con la coda Redis.
-
-\begin{lstlisting}[language=FLY,caption={Python generato da un file di esempio della stima di PI Greco usando il metodo Monte Carlo}, label={lst:k8s}]
-    let redis = require('redis'), client = redis.createClient({port:6379,host:'redis'});
-var x = Math.random()
-var y = Math.random()
-var msg = 0
-if((x * x) + (y * y) < 1.0)
-    {
-        msg = 1 
-    }
-client.on('ready', function (err) {
-client.rpush('queue:jobs',msg)});
-\end{lstlisting}
-
-
-\begin{lstlisting}[language=FLY,caption={File di configurazione per il servizio Redis}, label={lst:k8s}]
-  apiVersion: v1
-kind: Service
-metadata:
-name: redis
-spec:
-ports:
-  - port: 6379
-    targetPort: 6379
-selector:
-  app: redis
-  ---
-  apiVersion: v1
-kind: Service
-metadata:
-name: public-svc
-spec:
-type: LoadBalancer
-ports:
-- port: 6379
-selector:
-  app: redis
-
-\end{lstlisting}
-
-\begin{lstlisting}[language=FLY,caption={Dockerfile}, label={lst:k8s}]
-    FROM node:10
-    EXPOSE 8888
-    WORKDIR /function
-    COPY ./main.py .
-    RUN npm install redis
-    CMD ["python3", "main.py"]
-\end{lstlisting}
-
-\begin{lstlisting}[language=FLY,caption={File di Deployment}, label={lst:k8s}]
-    apiVersion: batch/v1
-    kind: Job
-    metadata:
-      name: fly-job
-    spec:
-      parallelism: ${parallelism}
-      completions: ${completions}
-      ttlSecondsAfterFinished: 5
-      template:
-        metadata:
-          name: fly
-          labels:
-            jobgroup: fly
-        spec:
-          containers:
-            - name: fly-python
-              image: ${registryName}/fly_python
-              command: [ "python", "./main.py" ]
-          restartPolicy: Never
-\end{lstlisting}
