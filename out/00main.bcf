@@ -2348,16 +2348,12 @@
     <bcf:citekey order="2">MODAClouds</bcf:citekey>
     <bcf:citekey order="3">TOSCASite</bcf:citekey>
     <bcf:citekey order="4">TOSCAServerless</bcf:citekey>
-    <bcf:citekey order="5">TOSCAServerless</bcf:citekey>
     <bcf:citekey order="6">CAMELSite</bcf:citekey>
     <bcf:citekey order="7">@ServerlessCamel</bcf:citekey>
-    <bcf:citekey order="8">@ServerlessCamel</bcf:citekey>
     <bcf:citekey order="9">MELODIC</bcf:citekey>
     <bcf:citekey order="10">ServerlessMultiCloud</bcf:citekey>
-    <bcf:citekey order="11">ServerlessMultiCloud</bcf:citekey>
     <bcf:citekey order="12">ServerlessSite</bcf:citekey>
     <bcf:citekey order="13">DistributedFaas</bcf:citekey>
-    <bcf:citekey order="14">DistributedFaas</bcf:citekey>
     <bcf:citekey order="15">ForbesMultiCloud</bcf:citekey>
     <bcf:citekey order="16">ISISLab</bcf:citekey>
     <bcf:citekey order="17">ISISLab</bcf:citekey>
